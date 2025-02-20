@@ -1,4 +1,5 @@
 ﻿using CRM.Client.Extensions;
+using CRM.Client.Layouts;
 
 namespace CRM.Client
 {
@@ -7,20 +8,19 @@ namespace CRM.Client
         public AppShell()
         {
             InitializeComponent();
-            //LoadPlatformSpecificXaml();
+            LoadPlatformSpecificXaml();
             ServicesExtension.RegisterRoute();
-
         }
-        //private void LoadPlatformSpecificXaml()
-        //{
-        //    if (DeviceInfo.Platform == DevicePlatform.Android)
-        //    {
-        //        this.LoadFromXaml(typeof(AndroidLayout));
-        //    }
-        //    else if (DeviceInfo.Platform == DevicePlatform.WinUI)
-        //    {
-        //        this.LoadFromXaml(typeof(WindowsLayout));
-        //    }
-        //}
+        private void LoadPlatformSpecificXaml()
+        {
+            if (DeviceInfo.Platform == DevicePlatform.Android)
+            {
+                this.LoadFromXaml(typeof(AndroidLayout));
+            }
+            else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            {
+                this.LoadFromXaml(typeof(WindowsLayout));
+            }
+        }
     }
 }

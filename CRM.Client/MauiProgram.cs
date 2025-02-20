@@ -23,6 +23,11 @@ namespace CRM.Client
                     fonts.AddFont("Inter_18pt-Bold.ttf", FontNames.InterBold);
                     fonts.AddFont("Inter_18pt-Italic.ttf", FontNames.InterItalic);
                     fonts.AddFont("Inter_24pt-Medium.ttf", FontNames.InterMedium);
+                    fonts.AddFont("Brands-Regular-400.otf", "FAB");
+                    fonts.AddFont("Pro-Regular-400.otf", "FAR");
+                    fonts.AddFont("Pro-Solid-900.otf", "FAS");
+                    fonts.AddFont("Roboto-Regular.ttf", "RobotoReg");
+                    fonts.AddFont("Roboto-SemiBold.ttf", "RobotoSB");
                 })
                 .ConfigureEssentials(essentials => { essentials.UseVersionTracking(); })
                 .RegisterCore()

@@ -1,7 +1,7 @@
 ﻿using CRM.UI;
 using Microsoft.Maui.Controls.Shapes;
 
-namespace TestApp.UI;
+namespace CRM.UI;
 
 
 public partial class Styles
@@ -26,6 +26,10 @@ public partial class Styles
         {
             CornerRadius = new CornerRadius(16)
         });
+
+    public static readonly Style LabelGradent = CreateStyle<Label>()
+       .Set(Label.TextColorProperty, AppColors.Gradient)
+       .Set(Label.FontFamilyProperty, FontNames.InterRegular);
 
     static readonly Style ButtonBase = CreateStyle<Button>()
         .Set(VisualElement.BackgroundColorProperty, AppColors.Purple)

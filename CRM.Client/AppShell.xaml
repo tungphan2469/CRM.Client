@@ -6,8 +6,5 @@
     xmlns:local="clr-namespace:CRM.Client"
     Shell.NavBarIsVisible="False">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+   
 </Shell>

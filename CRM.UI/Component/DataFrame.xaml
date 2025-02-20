@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CRM.UI.Component.DataFrame"
+             xmlns:ui="clr-namespace:CRM.UI"
+             x:Name="this">
+    <Border
+        Stroke="Transparent"
+        BackgroundColor="White">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="10"/>
+        </Border.StrokeShape>
+        <Border.Shadow>
+            <Shadow Brush="Black"
+                    Offset="0,0"
+                    Radius="10"
+                    Opacity="0.3"/>
+        </Border.Shadow>
+
+        <StackLayout Padding="14" Spacing="6">
+            <Label Text="{Binding DataInfo, Source={x:Reference this}}"
+                   FontSize="32"
+                   TextColor="{Binding DataInfoColor, Source={x:Reference this}}"
+                   FontFamily="RobotoSG"
+                   />
+            <Label Text="{Binding DataTitle, Source={x:Reference this}}" 
+                   FontSize="13"
+                   TextColor="{Binding DataTitleColor, Source={x:Reference this}}"
+                   FontFamily="RobotoREG"
+                   FontAttributes="Bold"/>
+        </StackLayout>
+
+    </Border>
+    
+</ContentView>

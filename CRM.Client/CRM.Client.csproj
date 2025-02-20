@@ -63,12 +63,37 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 		<PackageReference Include="Telerik.UI.for.Maui" Version="9.0.0" />
+		<PackageReference Include="XamlStyler.Console" Version="3.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\CRM.Library\CRM.Library.csproj" />
 	  <ProjectReference Include="..\CRM.UI\CRM.UI.csproj" />
 	  <ProjectReference Include="..\CRM.Utilities\CRM.Utilities.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Layouts\WindowsLayout.xaml.cs">
+	    <DependentUpon>WindowsLayout.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Features\Archive\ArchiveView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Features\Home\HomeView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\AndroidLayout.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Layouts\WindowsLayout.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

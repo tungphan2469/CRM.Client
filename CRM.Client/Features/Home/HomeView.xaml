@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CRM.Client.Features.Home.HomeView"
+             xmlns:frame="clr-namespace:CRM.UI.Component;assembly=CRM.UI"
+             xmlns:ui="clr-namespace:CRM.UI;assembly=CRM.UI">
+    <VerticalStackLayout>
+        <Grid ColumnDefinitions="128*,64*"
+              RowDefinitions="*,*,*"
+              Padding="34,24">
+            <!--Hello and Date time-->
+            <VerticalStackLayout Grid.Row="0"
+                                 Grid.Column="0"
+                                Spacing="10"
+                                 Margin="0,0,0,38">
+                <Label 
+                   Text="Welcome Tung Phan!"
+                   TextColor="Black"
+                   FontSize="32"
+                   FontFamily="RobotoSB">
+                </Label>
+                <Label 
+                   Text="May 28, 2020"
+                   TextColor="Black"
+                   FontSize="24"
+                   FontFamily="RobotoREG">
+                </Label>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="1"
+                                 Grid.Column="0"
+                                 Spacing="10">
+                <Label 
+                   Text="Application Statistic"
+                   TextColor="Black"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   FontFamily="RobotoREG">
+                </Label>
+                <Grid ColumnDefinitions="*,*,*"
+                      ColumnSpacing="14">
+                    <frame:DataFrame Grid.Column="0" 
+                                     DataInfo="6"
+                                     DataTitle="Contract Roles"
+                                     BackgroundColor="White"
+                                     DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
+                                     DataTitleColor="Black"
+                                     Padding="8"
+                                    />
+                    <frame:DataFrame Grid.Column="1" 
+                                     DataInfo="12"
+                                     DataTitle="Full-Time Roles"
+                                     BackgroundColor="White"
+                                     DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
+                                      DataTitleColor="Black"
+                                     Padding="8"
+                                        />
+                    <frame:DataFrame Grid.Column="2" 
+                                     DataInfo="18"
+                                     DataTitle="Total Applications"
+                                     BackgroundColor="White"
+                                     DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
+                                      DataTitleColor="Black"
+                                     Padding="8"
+                                        />
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentView>
