@@ -2,6 +2,8 @@
 
 public static class Dimens
 {
+    public static readonly double NavBarTextSize = 16;
+
     public static readonly double ImageRatioOfHeightOnWidth = 3.0 / 4;
 
     public static readonly double SpacingXs = 4;

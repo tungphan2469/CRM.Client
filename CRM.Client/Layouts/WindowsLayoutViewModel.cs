@@ -29,7 +29,6 @@ namespace CRM.Client.Layouts
             TogglePaneCommand = new Command(() => IsOpen = !IsOpen);
         }
 
-
         public ICommand TogglePaneCommand { get; }
 
         public void ChangeView(string viewName)

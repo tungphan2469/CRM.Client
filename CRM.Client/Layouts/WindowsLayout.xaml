@@ -99,7 +99,7 @@
                     <Setter Property="Margin" Value="0,0,0,16"/>
                     <Setter Property="TextColor" Value="White"/>
                     <Setter Property="FontFamily" Value="RobotoSB"/>
-                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontSize" Value="{x:Static ui:Dimens.NavBarTextSize}"/>
                     <Setter Property="BorderColor" Value="Transparent"/>
                 </Style>
             </ResourceDictionary>
@@ -110,37 +110,37 @@
             <!--<telerik:NavigationViewItem Style="{StaticResource ProfileMargin}" ControlTemplate="{StaticResource ProfileImage}"/>-->
             <telerik:NavigationViewItem Position="Footer" Text="New Job">
                 <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.PenToSquare}" Size="16"/>
+                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.PenToSquare}" Size="{x:Static ui:Dimens.NavBarTextSize}"/>
                 </telerik:NavigationViewItem.ImageSource>
             </telerik:NavigationViewItem>
             <telerik:NavigationViewItem Position="Footer" Text="Archive">
                 <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.BoxArchive}" Size="16" />
+                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.BoxArchive}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
                 </telerik:NavigationViewItem.ImageSource>
             </telerik:NavigationViewItem>
             <telerik:NavigationViewItem Position="Footer" Text="Bookmark">
                 <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Bookmark}" Size="16" />
+                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Bookmark}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
                 </telerik:NavigationViewItem.ImageSource>
             </telerik:NavigationViewItem>
             <telerik:NavigationViewItem Position="Footer" Text="Share">
                 <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Share}" Size="16" />
+                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Share}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
                 </telerik:NavigationViewItem.ImageSource>
             </telerik:NavigationViewItem>
             <telerik:NavigationViewItem Position="Footer" Text="Download">
                 <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Download}" Size="16" />
+                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Download}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
                 </telerik:NavigationViewItem.ImageSource>
             </telerik:NavigationViewItem>
             <telerik:NavigationViewItem Position="Footer" Text="Print">
                 <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Print}" Size="16" />
+                    <FontImageSource FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Print}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
                 </telerik:NavigationViewItem.ImageSource>
             </telerik:NavigationViewItem>
             <telerik:NavigationViewItem Position="Footer" Text="Settings">
                 <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource  FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Gear}" Size="16" />
+                    <FontImageSource  FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Gear}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
                 </telerik:NavigationViewItem.ImageSource>
             </telerik:NavigationViewItem>
         </telerik:RadNavigationView.Items>

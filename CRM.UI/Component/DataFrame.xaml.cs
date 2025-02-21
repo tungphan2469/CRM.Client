@@ -36,6 +36,13 @@ public partial class DataFrame : ContentView
        Colors.Black,
        BindingMode.TwoWay);
 
+    public static readonly BindableProperty DataFrameBackgroundColorProperty = BindableProperty.Create(
+       nameof(DataFrameBackgroundColor),
+       typeof(Color),
+       typeof(DataFrame),
+       Colors.Black,
+       BindingMode.TwoWay);
+
     public string DataInfo
     {
         get => (string)GetValue(DataInfoProperty);
@@ -56,5 +63,10 @@ public partial class DataFrame : ContentView
     {
         get => (Color)GetValue(DataTitleColorProperty);
         set => SetValue(DataTitleColorProperty, value);
+    }
+    public Color DataFrameBackgroundColor
+    {
+        get => (Color)GetValue(DataFrameBackgroundColorProperty);
+        set => SetValue(DataFrameBackgroundColorProperty, value);
     }
 }
