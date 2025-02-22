@@ -7,9 +7,25 @@
              xmlns:ui="clr-namespace:CRM.UI;assembly=CRM.UI"
              >
     <ContentView.Resources>
-        <Style TargetType="telerik:DataGridCellDecorationAppearance" x:Key="TextCellDecorationsStyle">
-            <Setter Property="BackgroundColor" Value="#1A7C59B6" />
-        </Style>
+        <ResourceDictionary>
+            <Style TargetType="telerik:DataGridCurrentCellAppearance" x:Key="CurrentCellStyle">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BorderColor" Value="Transparent" />
+            </Style>
+
+            <!-- Common header style -->
+            <Style x:Key="DefaultColumnHeaderStyle" TargetType="telerik:DataGridColumnHeaderAppearance">
+                <Setter Property="TextHorizontalOptions" Value="Center" />
+                <Setter Property="SortIndicatorHorizontalOptions" Value="Center" />
+                <Setter Property="BorderColor" Value="Transparent" />
+            </Style>
+
+            <!-- Common cell content style -->
+            <Style x:Key="DefaultCellContentStyle" TargetType="telerik:DataGridTextCellAppearance">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+
         <DataTemplate x:Key="StatusCellTemplate">
             <HorizontalStackLayout IsClippedToBounds="True"
                                VerticalOptions="Center"
@@ -36,7 +52,8 @@
                    Text="Welcome Tung Phan!"
                    TextColor="Black"
                    FontSize="32"
-                   FontFamily="RobotoSB">
+                   FontFamily="RobotoSB"
+                    >
                 </Label>
                 <Label 
                    Text="May 28, 2020"
@@ -45,16 +62,19 @@
                    FontFamily="RobotoREG">
                 </Label>
             </VerticalStackLayout>
-
+            
+            <!--Summary boxes-->
             <VerticalStackLayout Grid.Row="1"
                                  Grid.Column="0"
-                                 Spacing="10">
+                                 Spacing="10"
+                                 Margin="0,0,0,14">
                 <Label 
                    Text="Application Statistic"
                    TextColor="Black"
                    FontSize="16"
                    FontAttributes="Bold"
-                   FontFamily="RobotoREG">
+                   FontFamily="RobotoREG"
+                   Margin="14,0,0,0">
                 </Label>
                 <Grid ColumnDefinitions="*,*,*"
                       ColumnSpacing="14">
@@ -85,116 +105,111 @@
                 </Grid>
             </VerticalStackLayout>
 
+            <!--Tabular data-->
             <VerticalStackLayout Grid.Row="2"
                      Grid.Column="0"
-                     Spacing="10">
-                <Label 
-                        Text="Application Statistic"
-                        TextColor="Black"
-                        FontSize="16"
-                        FontAttributes="Bold"
-                        FontFamily="RobotoREG">
-                </Label>
+                     Spacing="10"
+                            >
+                <Grid ColumnDefinitions="*,*">
+                    <Label Grid.Column="0"
+                           Text="Status board"
+                           HorizontalOptions="Start"
+                           TextColor="Black"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="RobotoREG"
+                           Margin="14,0,0,0"/>
+                    <Label Grid.Column="1"
+                           Text="Application Statistic"
+                           HorizontalOptions="End"
+                           TextColor="Black"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="RobotoREG" />
+                </Grid>
                 <telerik:RadBorder  BorderColor="#04A2AA"
                    CornerRadius="8"
                    AutomationId="border"
                    BorderThickness="1">
-                    
                     <telerik:RadDataGrid x:Name="grid" 
                                     BorderBrush="Transparent"
                                     ItemsSource="{Binding Roles}" 
                                     AutoGenerateColumns="False"
-                                    GridLinesVisibility="None"
                                     UserFilterMode="Disabled"
-                                     UserEditMode="None"
+                                    UserEditMode="None"
                                     UserGroupMode="Disabled"
-                                     UserSortMode="None"
+                                    UserSortMode="None"
                                     AutomationId="dataGrid"
-                            >
+                                    SelectionMode="None"
+                                    GridLinesVisibility="Horizontal"
+                                    GridLinesThickness="1.4"
+                                         CurrentCellStyle="{StaticResource CurrentCellStyle}"
+                                        >
                         <telerik:RadDataGrid.Columns>
-                            <telerik:DataGridTextColumn PropertyName="CompanyName" 
-                                                        HeaderText="CompanyName">
-                                <telerik:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="telerik:DataGridColumnHeaderAppearance">
-                                        <Setter Property="TextHorizontalOptions" Value="Center" />
-                                        <Setter Property="SortIndicatorHorizontalOptions" Value="Center" />
-                                        <Setter Property="BorderColor" Value="Transparent" />
-                                    </Style>
-                                </telerik:DataGridTextColumn.HeaderStyle>
-                                <telerik:DataGridTextColumn.CellContentStyle>
-                                    <Style TargetType="telerik:DataGridTextCellAppearance">
-                                        <Setter Property="HorizontalTextAlignment" Value="Center" />
-                                    </Style>
+                            <!--Checkbox-->
+                            <telerik:DataGridTemplateColumn HeaderStyle="{StaticResource DefaultColumnHeaderStyle}">
+                                <telerik:DataGridTemplateColumn.CellContentTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout HorizontalOptions="Center">
+                                            <CheckBox></CheckBox>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </telerik:DataGridTemplateColumn.CellContentTemplate>
+                            </telerik:DataGridTemplateColumn>
+                            <!--Logo-->
+                            <telerik:DataGridTemplateColumn HeaderStyle="{StaticResource DefaultColumnHeaderStyle}">
+                                <telerik:DataGridTemplateColumn.CellContentTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                            <Image>
+                                                <Image.Source>
+                                                    <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{Binding Logo}" Size="{x:Static ui:Dimens.FontSizeT2}" />
+                                                </Image.Source>
+                                            </Image>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </telerik:DataGridTemplateColumn.CellContentTemplate>
+                            </telerik:DataGridTemplateColumn>
+                            <!--Company name-->
+                            <telerik:DataGridTextColumn PropertyName="CompanyName" HeaderText="CompanyName"
+                                HeaderStyle="{StaticResource DefaultColumnHeaderStyle}"
+                                CellContentStyle="{StaticResource DefaultCellContentStyle}" />
+                            <!--Position-->
+                            <telerik:DataGridTextColumn PropertyName="Position" HeaderText="Position"
+                                HeaderStyle="{StaticResource DefaultColumnHeaderStyle}"
+                                CellContentStyle="{StaticResource DefaultCellContentStyle}" />
+                            <!--Duration-->
+                            <telerik:DataGridTextColumn PropertyName="Duration" HeaderText="Duration"
+                                HeaderStyle="{StaticResource DefaultColumnHeaderStyle}"
+                                CellContentStyle="{StaticResource DefaultCellContentStyle}" />
+                            <!--JobId-->
+                            <telerik:DataGridTextColumn PropertyName="JobId" HeaderText="JobId"
+                                HeaderStyle="{StaticResource DefaultColumnHeaderStyle}"
+                                CellContentStyle="{StaticResource DefaultCellContentStyle}" />
+                            <!--Status-->
+                            <telerik:DataGridTextColumn PropertyName="Status" HeaderText="Status"
+                                HeaderStyle="{StaticResource DefaultColumnHeaderStyle}"
+                                CellContentStyle="{StaticResource DefaultCellContentStyle}" />
+                            <!--More button-->
+                            <telerik:DataGridTemplateColumn HeaderStyle="{StaticResource DefaultColumnHeaderStyle}">
+                                <telerik:DataGridTemplateColumn.CellContentTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <VerticalStackLayout>
+                                                <ImageButton>
+                                                    <ImageButton.Source>
+                                                        <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.EllipsisVertical}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                                    </ImageButton.Source>
+                                                </ImageButton>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </telerik:DataGridTemplateColumn.CellContentTemplate>
+                            </telerik:DataGridTemplateColumn>
 
-                                </telerik:DataGridTextColumn.CellContentStyle>
-
-                            </telerik:DataGridTextColumn>
-                            <telerik:DataGridTextColumn PropertyName="Position" 
-                                                        HeaderText="Position">
-                                <telerik:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="telerik:DataGridColumnHeaderAppearance">
-                                        <Setter Property="TextHorizontalOptions" Value="Center" />
-                                        <Setter Property="SortIndicatorHorizontalOptions" Value="Center" />
-                                        <Setter Property="BorderColor" Value="Transparent" />
-                                    </Style>
-                                </telerik:DataGridTextColumn.HeaderStyle>
-                                <telerik:DataGridTextColumn.CellContentStyle>
-                                    <Style TargetType="telerik:DataGridTextCellAppearance">
-                                        <Setter Property="HorizontalTextAlignment" Value="Center" />
-                                    </Style>
-                                    </telerik:DataGridTextColumn.CellContentStyle>
-                            </telerik:DataGridTextColumn>
-                            <telerik:DataGridTextColumn PropertyName="Duration" 
-                                                        HeaderText="Duration">
-                                <telerik:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="telerik:DataGridColumnHeaderAppearance">
-                                        <Setter Property="TextHorizontalOptions" Value="Center" />
-                                        <Setter Property="SortIndicatorHorizontalOptions" Value="Center" />
-                                        <Setter Property="BorderColor" Value="Transparent" />
-                                    </Style>
-                                </telerik:DataGridTextColumn.HeaderStyle>
-                                <telerik:DataGridTextColumn.CellContentStyle>
-                                    <Style TargetType="telerik:DataGridTextCellAppearance">
-                                        <Setter Property="HorizontalTextAlignment" Value="Center" />
-                                    </Style>
-                                </telerik:DataGridTextColumn.CellContentStyle>
-                            </telerik:DataGridTextColumn>
-                            <telerik:DataGridTextColumn PropertyName="JobId" 
-                                                        HeaderText="JobId">
-                                <telerik:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="telerik:DataGridColumnHeaderAppearance">
-                                        <Setter Property="TextHorizontalOptions" Value="Center" />
-                                        <Setter Property="SortIndicatorHorizontalOptions" Value="Center" />
-                                        <Setter Property="BorderColor" Value="Transparent" />
-                                    </Style>
-                                </telerik:DataGridTextColumn.HeaderStyle>
-                                <telerik:DataGridTextColumn.CellContentStyle>
-                                    <Style TargetType="telerik:DataGridTextCellAppearance">
-                                        <Setter Property="HorizontalTextAlignment" Value="Center" />
-                                    </Style>
-                                    </telerik:DataGridTextColumn.CellContentStyle>
-
-                            </telerik:DataGridTextColumn>
-                            <telerik:DataGridTextColumn PropertyName="Status" 
-                                                        HeaderText="Status">
-                                <telerik:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="telerik:DataGridColumnHeaderAppearance">
-                                        <Setter Property="TextHorizontalOptions" Value="Center" />
-                                        <Setter Property="SortIndicatorHorizontalOptions" Value="Center" />
-                                        <Setter Property="BorderColor" Value="Transparent" />
-                                    </Style>
-                                </telerik:DataGridTextColumn.HeaderStyle>
-                                <telerik:DataGridTextColumn.CellContentStyle>
-                                    <Style TargetType="telerik:DataGridTextCellAppearance">
-                                        <Setter Property="HorizontalTextAlignment" Value="Center" />
-                                    </Style>
-
-                                </telerik:DataGridTextColumn.CellContentStyle>
-                            </telerik:DataGridTextColumn>
                         </telerik:RadDataGrid.Columns>
                     </telerik:RadDataGrid>
                 </telerik:RadBorder>
-                <!--</Border>-->
 
             </VerticalStackLayout>
         </Grid>
