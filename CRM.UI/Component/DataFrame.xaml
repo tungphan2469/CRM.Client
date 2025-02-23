@@ -19,7 +19,7 @@
 
         <StackLayout Padding="14" Spacing="6">
             <Label Text="{Binding DataInfo, Source={x:Reference this}}"
-                   FontSize="32"
+                   FontSize="{Binding DataInfoFontSize, Source={x:Reference this}}"
                    TextColor="{Binding DataInfoColor, Source={x:Reference this}}"
                    FontFamily="RobotoSG"
                    />

@@ -5,6 +5,8 @@
              xmlns:frame="clr-namespace:CRM.UI.Component;assembly=CRM.UI"
              xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
              xmlns:ui="clr-namespace:CRM.UI;assembly=CRM.UI"
+             xmlns:view="clr-namespace:CRM.UI.Component;assembly=CRM.UI"
+             xmlns:vm="clr-namespace:CRM.Client.Features.Home"
              >
     <ContentView.Resources>
         <ResourceDictionary>
@@ -40,9 +42,10 @@
         </DataTemplate>
     </ContentView.Resources>
     <VerticalStackLayout>
-        <Grid ColumnDefinitions="128*,64*"
+        <Grid ColumnDefinitions="150*,42*"
               RowDefinitions="*,*,*"
-              Padding="34,24">
+              Padding="34,24"
+              ColumnSpacing="14">
             <!--Hello and Date time-->
             <VerticalStackLayout Grid.Row="0"
                                  Grid.Column="0"
@@ -62,45 +65,67 @@
                    FontFamily="RobotoREG">
                 </Label>
             </VerticalStackLayout>
-            
+
             <!--Summary boxes-->
             <VerticalStackLayout Grid.Row="1"
                                  Grid.Column="0"
                                  Spacing="10"
                                  Margin="0,0,0,14">
-                <Label 
-                   Text="Application Statistic"
-                   TextColor="Black"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   FontFamily="RobotoREG"
-                   Margin="14,0,0,0">
-                </Label>
+                <Grid ColumnDefinitions="*,*"
+                      HeightRequest="30">
+
+                    <Label 
+                        Grid.Column="0"
+                        HorizontalOptions="Start"
+                       Text="Application Statistic"
+                       TextColor="Black"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       FontFamily="RobotoREG"
+                       Margin="14,0,0,0">
+                    </Label>
+                    <Label 
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                       Text="See All"
+                       TextColor="#A2A2A2"
+                       FontSize="12"
+                       FontFamily="RobotoREG"
+                       Margin="14,0,0,0">
+                    </Label>
+                </Grid>
                 <Grid ColumnDefinitions="*,*,*"
                       ColumnSpacing="14">
                     <frame:DataFrame Grid.Column="0" 
                                      DataInfo="6"
+                                     DataInfoFontSize="32"
                                      DataTitle="Contract Roles"
                                      DataFrameBackgroundColor="White"
                                      DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
                                      DataTitleColor="Black"
                                      Padding="8"
+                                     HeightRequest="108"
                                     />
                     <frame:DataFrame Grid.Column="1" 
                                      DataInfo="12"
+                                     DataInfoFontSize="32"
                                      DataTitle="Full-Time Roles"
                                      DataFrameBackgroundColor="White"
                                      DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
                                       DataTitleColor="Black"
                                      Padding="8"
+                                     HeightRequest="108"
                                         />
                     <frame:DataFrame Grid.Column="2" 
                                      DataInfo="18"
+                                     DataInfoFontSize="32"
                                      DataTitle="Total Applications"
                                      DataFrameBackgroundColor="White"
                                      DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
                                      DataTitleColor="Black"
                                      Padding="8"
+                                     HeightRequest="108"
                                         />
                 </Grid>
             </VerticalStackLayout>
@@ -110,22 +135,50 @@
                      Grid.Column="0"
                      Spacing="10"
                             >
-                <Grid ColumnDefinitions="*,*">
+                <Grid ColumnDefinitions="*,*"
+                      HeightRequest="30">
                     <Label Grid.Column="0"
                            Text="Status board"
                            HorizontalOptions="Start"
+                           VerticalOptions="Center"
                            TextColor="Black"
                            FontSize="16"
                            FontAttributes="Bold"
                            FontFamily="RobotoREG"
                            Margin="14,0,0,0"/>
-                    <Label Grid.Column="1"
-                           Text="Application Statistic"
-                           HorizontalOptions="End"
-                           TextColor="Black"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           FontFamily="RobotoREG" />
+                    <HorizontalStackLayout Grid.Column="1" 
+                                           HorizontalOptions="End">
+                        <ImageButton>
+                            <ImageButton.Source>
+                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Sliders}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton>
+                            <ImageButton.Source>
+                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.PenToSquare}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton>
+                            <ImageButton.Source>
+                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.ShareNodes}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton>
+                            <ImageButton.Source>
+                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.MagnifyingGlass}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton>
+                            <ImageButton.Source>
+                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Trash}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton>
+                            <ImageButton.Source>
+                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Plus}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </HorizontalStackLayout>
                 </Grid>
                 <telerik:RadBorder  BorderColor="#04A2AA"
                    CornerRadius="8"
@@ -161,9 +214,9 @@
                                 <telerik:DataGridTemplateColumn.CellContentTemplate>
                                     <DataTemplate>
                                         <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                            <Image>
+                                            <Image Aspect="AspectFit">
                                                 <Image.Source>
-                                                    <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{Binding Logo}" Size="{x:Static ui:Dimens.FontSizeT2}" />
+                                                    <FontImageSource Color="#989898" FontFamily="FAB" Glyph="{Binding Logo}" Size="{x:Static ui:Dimens.FontSizeT2}" />
                                                 </Image.Source>
                                             </Image>
                                         </VerticalStackLayout>
@@ -196,7 +249,8 @@
                                     <DataTemplate>
                                         <Grid>
                                             <VerticalStackLayout>
-                                                <ImageButton>
+                                                <ImageButton Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmSaveSettingPopupCommand}"
+                                                             CommandParameter="{Binding .}">
                                                     <ImageButton.Source>
                                                         <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.EllipsisVertical}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
                                                     </ImageButton.Source>
@@ -212,6 +266,134 @@
                 </telerik:RadBorder>
 
             </VerticalStackLayout>
+
+            <!--Interviewers-->
+            <VerticalStackLayout Grid.Row="1"
+                     Grid.Column="1"
+                     Spacing="10"
+                     Margin="0,0,0,14">
+                <Grid ColumnDefinitions="*,*"
+                      HeightRequest="30">
+
+                    <Label 
+                        Grid.Column="0"
+                        HorizontalOptions="Start"
+                       Text="Interviewer"
+                       TextColor="Black"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       FontFamily="RobotoREG"
+                       Margin="14,0,0,0">
+                    </Label>
+                    <Label 
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                       Text="See All"
+                       TextColor="#A2A2A2"
+                       FontSize="12"
+                       FontFamily="RobotoREG"
+                       Margin="14,0,0,0">
+                    </Label>
+                </Grid>
+                <Grid ColumnDefinitions="*"
+                      ColumnSpacing="14">
+                    <frame:DataFrame Grid.Column="0" 
+                         DataInfo="Figma Product Designer Interview | Chad Lee"
+                         DataTitle="May 4, 2020 @12:30 pm - 1:00 pm"
+                         DataInfoFontSize="16"
+                         DataInfoColor="White"
+                         DataTitleColor="White"
+                         DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
+                         Padding="8"
+                         HeightRequest="108"
+                        />
+
+                </Grid>
+            </VerticalStackLayout>
+
+            <!--Roles-->
+            <VerticalStackLayout Grid.Row="2"
+                              Grid.Column="1"
+                                            >
+                <Grid ColumnDefinitions="*,*"
+                      HeightRequest="30">
+                    <Label
+                            Text="Status board"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            TextColor="Black"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            FontFamily="RobotoREG"
+                            Margin="14,0,0,0"/>
+                    <Label 
+                             Grid.Column="1"
+                             HorizontalOptions="End"
+                             VerticalOptions="End"
+                            Text="See All"
+                            TextColor="#A2A2A2"
+                            FontSize="12"
+                            FontFamily="RobotoREG"
+                            Margin="14,0,0,0">
+                    </Label>
+                </Grid>
+                <frame:DataFrame Grid.Column="0" 
+                     DataInfo="6"
+                     DataTitle="Visual desinger"
+                     DataInfoFontSize="32"
+                     DataInfoColor="White"
+                     DataTitleColor="White"
+                     DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
+                     Padding="8"
+                     HeightRequest="108"
+                    />
+                <frame:DataFrame Grid.Column="0" 
+                     DataInfo="6"
+                     DataTitle="Visual desinger"
+                     DataInfoFontSize="32"
+                     DataInfoColor="White"
+                     DataTitleColor="White"
+                     DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
+                     Padding="8"
+                     HeightRequest="108"
+                    />
+                <frame:DataFrame Grid.Column="0" 
+                     DataInfo="6"
+                     DataTitle="Visual desinger"
+                     DataInfoFontSize="32"
+                     DataInfoColor="White"
+                     DataTitleColor="White"
+                     DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
+                     Padding="8"
+                     HeightRequest="108"
+                    />
+                <frame:DataFrame Grid.Column="0" 
+                     DataInfo="6"
+                     DataTitle="Visual desinger"
+                     DataInfoFontSize="32"
+                     DataInfoColor="White"
+                     DataTitleColor="White"
+                     DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
+                     Padding="8"
+                     HeightRequest="108"
+                    />
+            </VerticalStackLayout>
+            <view:PopupInfo 
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="3"
+                PopupWidth="480"
+                PopupHeight="248"
+                x:Name="confirmPopup"
+                IsOpen="{Binding IsOpenConfirmSaveSettingPopup}"
+                CloseCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
+                CancelCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
+                OkCommand="{Binding DeleteCommand}"
+                CommandParameter="{Binding SelectedItemName}"
+                TitlePopup="{Binding Title}"
+                Message="{Binding PopupMessage}"
+                RoleInfo="{Binding SelectedItem}"
+                />
         </Grid>
 
     </VerticalStackLayout>

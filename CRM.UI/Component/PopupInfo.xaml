@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CRM.UI.Component.PopupInfo"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:ui="clr-namespace:CRM.UI"
+             x:Name="this">
+    <telerik:RadPopup.Popup>
+        <telerik:RadPopup x:Name="popup"
+                       IsOpen="{Binding IsOpen, Source={x:Reference this}}"
+                       OutsideBackgroundColor="#66000000"
+                       Placement="Center"
+                       VerticalOffset="8">
+            <telerik:RadBorder BackgroundColor="#F4F5F7"
+                            CornerRadius="8"
+                            WidthRequest="732"
+                            >
+                <VerticalStackLayout>
+                    <!--Title-->
+                    <Grid
+                       Padding="32,32,32,0">
+                        <Label Text="{Binding TitlePopup, Source={x:Reference this}}"
+                            TextColor="Black"
+                            HorizontalOptions="Start" 
+                               FontSize="16"/>
+                        <Label FontFamily="FAS"
+                            FontSize="16"
+                            Text="{x:Static ui:FaSolModels.Xmark}"
+                            TextColor="Red"
+                            HorizontalOptions="End"
+                            x:Name="closeButton">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CloseCommand, Source={x:Reference this}}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                    <Grid ColumnDefinitions="150*,42*" 
+                        Padding="20,20,20,20"
+                          ColumnSpacing="20">
+                        <!--JOB INFO-->
+                        <VerticalStackLayout Grid.Column="0">
+                            <!--Company-->
+                            <Label Padding="12"
+                                    TextColor="Black"
+                                    Text="Company"
+                                    LineBreakMode="WordWrap" />
+                            <telerik:RadEntry
+                                      FontSize="14"
+                                        CornerRadius="0"
+                                        BackgroundColor="#EBECEF"
+                                        ClearButtonVisibility="WhileEditing"
+                                        BorderBrush="transparent"
+                                      PlaceholderColor="#99000000"
+                                      AutomationId="radEntry" 
+                                      Text="{Binding RoleInfo.CompanyName, Source={x:Reference this}}"/>
+                            <!--Position-->
+                            <Label Padding="12"
+                                    TextColor="Black"
+                                    Text="Position"
+                                    LineBreakMode="WordWrap" />
+                            <telerik:RadEntry 
+                                      FontSize="14"
+                                        CornerRadius="0"
+                                        BackgroundColor="#EBECEF"
+                                        ClearButtonVisibility="WhileEditing"
+                                        BorderBrush="transparent"
+                                      PlaceholderColor="#99000000"
+                                      AutomationId="radEntry" 
+                                      Text="{Binding RoleInfo.Position, Source={x:Reference this}}"/>
+                            <!--Duration-->
+                            <Label Padding="12"
+                                    TextColor="Black"
+                                    Text="Duration"
+                                    LineBreakMode="WordWrap" />
+                            <telerik:RadEntry 
+                                      FontSize="14"
+                                       CornerRadius="0"
+                                        BackgroundColor="#EBECEF"
+                                        ClearButtonVisibility="WhileEditing"
+                                        BorderBrush="transparent"
+                                      PlaceholderColor="#99000000"
+                                      AutomationId="radEntry" 
+                                      Text="{Binding RoleInfo.Duration, Source={x:Reference this}}"/>
+                            <!--Job ID-->
+                            <Label Padding="12"
+                                    TextColor="Black"
+                                    Text="Job ID#"
+                                    LineBreakMode="WordWrap" />
+                            <telerik:RadEntry 
+                                      FontSize="14"
+                                        CornerRadius="0"
+                                        BackgroundColor="#EBECEF"
+                                        ClearButtonVisibility="WhileEditing"
+                                        BorderBrush="transparent"
+                                      PlaceholderColor="#99000000"
+                                      AutomationId="radEntry" 
+                                      Text="{Binding RoleInfo.JobId, Source={x:Reference this}}"/>
+                            <!--Activity-->
+                            <Label Padding="12"
+                                        TextColor="Black"
+                                        Text="Activity"
+                                        LineBreakMode="WordWrap" />
+                            <telerik:RadEntry 
+                                      FontSize="14"
+                                        CornerRadius="0"
+                                        BackgroundColor="#EBECEF"
+                                        ClearButtonVisibility="WhileEditing"
+                                        BorderBrush="transparent"
+                                      Placeholder="Write a comment"
+                                      PlaceholderColor="#99000000"
+                                      AutomationId="radEntry" 
+                                      Text="{Binding RoleInfo.Activity, Source={x:Reference this}}"/>
+
+                            <telerik:RadButton
+                                Margin="0,12,0,12"
+                              BackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
+                              Command="{Binding OkCommand, Source={x:Reference this}}"
+                              CommandParameter="{Binding CommandParameter, Source={x:Reference this}}"
+                              VerticalContentAlignment="Center"
+                              HorizontalOptions="Start"
+                              WidthRequest="113"
+                              Text="Submit"
+                              />
+                        </VerticalStackLayout>
+                        <!--MORE-->
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <!--Add to role-->
+                            <Label
+                                Padding="0,0,0,12"
+                                 Text="ADD TO ROLE"
+                                 TextColor="Black"
+                                 HorizontalOptions="Start" 
+                                 FontSize="16"    
+                                 />
+
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Members" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Labels" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Checklist" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Due Date" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Attachment" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Logo" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+                            <!--Actions-->
+                            <Label
+                                Padding="0,12,0,12"
+                                 Text="ACTIONS"
+                                 TextColor="Black"
+                                 HorizontalOptions="Start" 
+                                 FontSize="16"    
+                                 />
+
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Move" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Copy" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Make Template" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Watch" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Archive" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="#EBECEF"
+                                         Stroke="Transparent"
+                                         HorizontalOptions="Center"
+                                         HeightRequest="34"
+                                         WidthRequest="168">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3"/>
+                                </Border.StrokeShape>
+                                <Label Text="Share" 
+                                       TextColor="#45536C"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap"/>
+                            </Border>
+
+
+                        </VerticalStackLayout>
+                    </Grid>
+
+                   
+                    <!--Action buttons-->
+                    
+                </VerticalStackLayout>
+            </telerik:RadBorder>
+        </telerik:RadPopup>
+    </telerik:RadPopup.Popup>
+</ContentView>

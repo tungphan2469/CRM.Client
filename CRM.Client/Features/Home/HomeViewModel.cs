@@ -11,12 +11,28 @@ using CRM.Library.Entities;
 using Telerik.Windows.Documents.Fixed.Model.Data;
 using Telerik.Windows.Documents.Spreadsheet.Expressions.Functions;
 using CRM.UI;
+using CommunityToolkit.Mvvm.Input;
 namespace CRM.Client.Features.Home
 {
     public partial class HomeViewModel : ObservableObject
     {
         [ObservableProperty]
         private DataTable data;
+
+        [ObservableProperty]
+        private Role selectedItem;
+
+        [ObservableProperty]
+        public ObservableCollection<string> items;
+
+        [ObservableProperty]
+        private bool isOpenConfirmSaveSettingPopup;
+
+        [ObservableProperty]
+        private string popupMessage;
+
+        [ObservableProperty]
+        private string title;
 
         private ObservableCollection<Role> roles;
 
@@ -28,7 +44,7 @@ namespace CRM.Client.Features.Home
             {
                 new Role()
                 {
-                    Logo = string.Format(FaRegModels.AppleCore),
+                    Logo = string.Format(FaBrands.Apple),
                     CompanyName = "Apple",
                     Position = "Visual designer",
                     Duration = "Full time",
@@ -38,8 +54,8 @@ namespace CRM.Client.Features.Home
                 },
                 new Role()
                 {
-                    Logo = "",
-                    CompanyName = "Booster",
+                    Logo = string.Format(FaBrands.Amazon),
+                    CompanyName = "Amazon",
                     Position = "Product designer",
                     Duration = "Full time",
                     JobId = "123123123",
@@ -48,8 +64,8 @@ namespace CRM.Client.Features.Home
                 },
                 new Role()
                 {
-                    Logo = "",
-                    CompanyName = "Goodle",
+                    Logo = string.Format(FaBrands.Google),
+                    CompanyName = "Google",
                     Position = "Interactive designer",
                     Duration = "Full time",
                     JobId = "123123123",
@@ -58,7 +74,7 @@ namespace CRM.Client.Features.Home
                 },
                 new Role()
                 {
-                    Logo = "",
+                    Logo = string.Format(FaBrands.Instagram),
                     CompanyName = "Instagram",
                     Position = "Product designer",
                     Duration = "Full time",
@@ -68,8 +84,8 @@ namespace CRM.Client.Features.Home
                 },
                 new Role()
                 {
-                    Logo = "",
-                    CompanyName = "Omada Health",
+                    Logo = string.Format(FaBrands.Skype),
+                    CompanyName = "Skype",
                     Position = "UX/UI designer",
                     Duration = "Full time",
                     JobId = "123123123",
@@ -78,7 +94,7 @@ namespace CRM.Client.Features.Home
                 },
                 new Role()
                 {
-                    Logo = "",
+                    Logo = string.Format(FaBrands.Salesforce),
                     CompanyName = "Salesforce",
                     Position = "Visual designer",
                     Duration = "12 months",
@@ -87,6 +103,21 @@ namespace CRM.Client.Features.Home
                     Activity = "",
                 }
             };
+        }
+
+        [RelayCommand]
+        private void OpenConfirmSaveSettingPopup(Role item)
+        {
+            SelectedItem = item;
+            Title = string.IsNullOrEmpty(item.CompanyName) ? "New Role" : "Edit Role";
+            PopupMessage = $"{SelectedItem.CompanyName}?"; // Update message
+            IsOpenConfirmSaveSettingPopup = true;
+        }
+
+        [RelayCommand]
+        private void CloseConfirmSaveSettingPopup()
+        {
+            IsOpenConfirmSaveSettingPopup = false;
         }
     }
 }
