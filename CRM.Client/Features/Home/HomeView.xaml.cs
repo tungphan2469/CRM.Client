@@ -9,4 +9,10 @@ public partial class HomeView : ContentView
         _viewModel = new HomeViewModel();
         BindingContext = _viewModel;
     }
+
+    private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        
+        // Perform required operation after examining e.Value
+    }
 }

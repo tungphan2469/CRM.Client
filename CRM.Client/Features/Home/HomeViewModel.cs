@@ -145,5 +145,7 @@ namespace CRM.Client.Features.Home
             }
             IsOpenConfirmSaveSettingPopup = false;
         }
+
+        
     }
 }

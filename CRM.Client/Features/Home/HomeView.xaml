@@ -184,7 +184,8 @@
                                     <DataTemplate>
                                         <VerticalStackLayout
                                             HorizontalOptions="Center">
-                                            <CheckBox></CheckBox>
+                                            <CheckBox
+                                               </CheckBox>
                                         </VerticalStackLayout>
                                     </DataTemplate>
                                 </telerik:DataGridTemplateColumn.CellContentTemplate>
