@@ -1,222 +1,210 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CRM.Client.Features.Home.HomeView"
-             xmlns:frame="clr-namespace:CRM.UI.Component;assembly=CRM.UI"
-             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
-             xmlns:ui="clr-namespace:CRM.UI;assembly=CRM.UI"
-             xmlns:view="clr-namespace:CRM.UI.Component;assembly=CRM.UI"
-             xmlns:vm="clr-namespace:CRM.Client.Features.Home"
-             >
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CRM.Client.Features.Home.HomeView"
+    xmlns:frame="clr-namespace:CRM.UI.Component;assembly=CRM.UI"
+    xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+    xmlns:ui="clr-namespace:CRM.UI;assembly=CRM.UI"
+    xmlns:view="clr-namespace:CRM.UI.Component;assembly=CRM.UI"
+    xmlns:vm="clr-namespace:CRM.Client.Features.Home"
+    xmlns:local="clr-namespace:CRM.Client.Features.Home"
+    x:Name="this">
     <ContentView.Resources>
         <ResourceDictionary>
-            <Style TargetType="telerik:DataGridCurrentCellAppearance" x:Key="CurrentCellStyle">
-                <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="BorderColor" Value="Transparent" />
-            </Style>
-
-            <!-- Common header style -->
-            <Style x:Key="DefaultColumnHeaderStyle" TargetType="telerik:DataGridColumnHeaderAppearance">
-                <Setter Property="TextHorizontalOptions" Value="Center" />
-                <Setter Property="SortIndicatorHorizontalOptions" Value="Center" />
-                <Setter Property="BorderColor" Value="Transparent" />
-            </Style>
-
-            <!-- Common cell content style -->
-            <Style x:Key="DefaultCellContentStyle" TargetType="telerik:DataGridTextCellAppearance">
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Style
+                TargetType="telerik:DataGridCurrentCellAppearance"
+                x:Key="CurrentCellStyle">
+                <Setter
+                    Property="BackgroundColor"
+                    Value="Transparent" />
+                <Setter
+                    Property="BorderColor"
+                    Value="Transparent" />
             </Style>
         </ResourceDictionary>
 
-        <DataTemplate x:Key="StatusCellTemplate">
-            <HorizontalStackLayout IsClippedToBounds="True"
-                               VerticalOptions="Center"
-                               Margin="4, 0">
-                <Label Text="{Binding Status}"
-                   Margin="2, 0" />
-                <Label Text="{Binding StatusTime}"
-                   IsVisible="{Binding Status, Converter={StaticResource StatusFlightToBooleanConverter}}"
-                   TextColor="{StaticResource AccentColor8}"
-                   Margin="2, 0" />
-            </HorizontalStackLayout>
-        </DataTemplate>
     </ContentView.Resources>
     <VerticalStackLayout>
-        <Grid ColumnDefinitions="150*,42*"
-              RowDefinitions="*,*,*"
-              Padding="34,24"
-              ColumnSpacing="14">
+        <Grid
+            ColumnDefinitions="150*,42*"
+            RowDefinitions="Auto,*,*"
+            Padding="34,24"
+            ColumnSpacing="14">
             <!--Hello and Date time-->
-            <VerticalStackLayout Grid.Row="0"
-                                 Grid.Column="0"
-                                 Spacing="10"
-                                 Margin="0,0,0,38">
-                <Label 
-                   Text="Welcome Tung Phan!"
-                   TextColor="Black"
-                   FontSize="32"
-                   FontFamily="RobotoSB"
-                    >
+            <VerticalStackLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                Spacing="10"
+                Margin="0,0,0,38">
+                <Label
+                    Text="Welcome Tung Phan!"
+                    TextColor="Black"
+                    FontSize="32"
+                    FontFamily="RobotoSB">
                 </Label>
-                <Label 
-                   Text="May 28, 2020"
-                   TextColor="Black"
-                   FontSize="24"
-                   FontFamily="RobotoREG">
+                <Label
+                    Text="May 28, 2020"
+                    TextColor="Black"
+                    FontSize="24"
+                    FontFamily="RobotoREG">
                 </Label>
             </VerticalStackLayout>
 
             <!--Summary boxes-->
-            <VerticalStackLayout Grid.Row="1"
-                                 Grid.Column="0"
-                                 Spacing="10"
-                                 Margin="0,0,0,14">
-                <Grid ColumnDefinitions="*,*"
-                      HeightRequest="30">
-
-                    <Label 
-                        Grid.Column="0"
-                        HorizontalOptions="Start"
-                       Text="Application Statistic"
-                       TextColor="Black"
-                       FontSize="16"
-                       FontAttributes="Bold"
-                       FontFamily="RobotoREG"
-                       Margin="14,0,0,0">
+            <VerticalStackLayout
+                Grid.Row="1"
+                Grid.Column="0"
+                Spacing="10"
+                Margin="0,0,0,14">
+                <Grid
+                    ColumnDefinitions="*,*"
+                    HeightRequest="30">
+                    <Label
+                        Text="Application Statistic"
+                        Style="{x:Static ui:Styles.HomeTitleLabelStyle}">
                     </Label>
-                    <Label 
+                    <Label
+                        Text="See All"
                         Grid.Column="1"
-                        HorizontalOptions="End"
-                        VerticalOptions="End"
-                       Text="See All"
-                       TextColor="#A2A2A2"
-                       FontSize="12"
-                       FontFamily="RobotoREG"
-                       Margin="14,0,0,0">
+                        Style="{x:Static ui:Styles.LabelSeeAllStyle}">
                     </Label>
                 </Grid>
-                <Grid ColumnDefinitions="*,*,*"
-                      ColumnSpacing="14">
-                    <frame:DataFrame Grid.Column="0" 
-                                     DataInfo="6"
-                                     DataInfoFontSize="32"
-                                     DataTitle="Contract Roles"
-                                     DataFrameBackgroundColor="White"
-                                     DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
-                                     DataTitleColor="Black"
-                                     Padding="8"
-                                     HeightRequest="108"
-                                    />
-                    <frame:DataFrame Grid.Column="1" 
-                                     DataInfo="12"
-                                     DataInfoFontSize="32"
-                                     DataTitle="Full-Time Roles"
-                                     DataFrameBackgroundColor="White"
-                                     DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
-                                      DataTitleColor="Black"
-                                     Padding="8"
-                                     HeightRequest="108"
-                                        />
-                    <frame:DataFrame Grid.Column="2" 
-                                     DataInfo="18"
-                                     DataInfoFontSize="32"
-                                     DataTitle="Total Applications"
-                                     DataFrameBackgroundColor="White"
-                                     DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
-                                     DataTitleColor="Black"
-                                     Padding="8"
-                                     HeightRequest="108"
-                                        />
+                <Grid
+                    ColumnDefinitions="*,*,*"
+                    ColumnSpacing="14">
+                    <frame:DataFrame
+                        DataInfo="6"
+                        DataTitle="Contract Roles"
+                        Grid.Column="0"
+                        Style="{x:Static ui:Styles.HomeDataFrameStyle}" />
+                    <frame:DataFrame
+                        DataTitle="Full-Time Roles"
+                        DataInfo="12"
+                        Grid.Column="1"
+                        Style="{x:Static ui:Styles.HomeDataFrameStyle}" />
+                    <frame:DataFrame
+                        Grid.Column="2"
+                        DataInfo="18"
+                        DataTitle="Total Applications"
+                        Style="{x:Static ui:Styles.HomeDataFrameStyle}" />
                 </Grid>
             </VerticalStackLayout>
 
             <!--Tabular data-->
-            <VerticalStackLayout Grid.Row="2"
-                     Grid.Column="0"
-                     Spacing="10"
-                            >
-                <Grid ColumnDefinitions="*,*"
-                      HeightRequest="30">
-                    <Label Grid.Column="0"
-                           Text="Status board"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           TextColor="Black"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           FontFamily="RobotoREG"
-                           Margin="14,0,0,0"/>
-                    <HorizontalStackLayout Grid.Column="1" 
-                                           HorizontalOptions="End">
+            <VerticalStackLayout
+                Grid.Row="2"
+                Grid.Column="0"
+                Spacing="10"
+                >
+                <Grid
+                    ColumnDefinitions="*,*"
+                    HeightRequest="30">
+                    <Label
+                        Text="Status board"
+                        Style="{x:Static ui:Styles.HomeTitleLabelStyle}" />
+                    <HorizontalStackLayout
+                        Grid.Column="1"
+                        HorizontalOptions="End">
                         <ImageButton>
                             <ImageButton.Source>
-                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Sliders}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                <FontImageSource
+                                    Color="#989898"
+                                    FontFamily="FAR"
+                                    Glyph="{x:Static ui:FaSolModels.Sliders}"
+                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
                             </ImageButton.Source>
                         </ImageButton>
                         <ImageButton>
                             <ImageButton.Source>
-                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.PenToSquare}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                <FontImageSource
+                                    Color="#989898"
+                                    FontFamily="FAR"
+                                    Glyph="{x:Static ui:FaSolModels.PenToSquare}"
+                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
                             </ImageButton.Source>
                         </ImageButton>
                         <ImageButton>
                             <ImageButton.Source>
-                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.ShareNodes}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                <FontImageSource
+                                    Color="#989898"
+                                    FontFamily="FAR"
+                                    Glyph="{x:Static ui:FaSolModels.ShareNodes}"
+                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
                             </ImageButton.Source>
                         </ImageButton>
                         <ImageButton>
                             <ImageButton.Source>
-                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.MagnifyingGlass}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                <FontImageSource
+                                    Color="#989898"
+                                    FontFamily="FAR"
+                                    Glyph="{x:Static ui:FaSolModels.MagnifyingGlass}"
+                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
                             </ImageButton.Source>
                         </ImageButton>
                         <ImageButton>
                             <ImageButton.Source>
-                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Trash}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                <FontImageSource
+                                    Color="#989898"
+                                    FontFamily="FAR"
+                                    Glyph="{x:Static ui:FaSolModels.Trash}"
+                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
                             </ImageButton.Source>
                         </ImageButton>
-                        <ImageButton>
+                        <ImageButton
+                            Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmSaveSettingPopupCommand}">
                             <ImageButton.Source>
-                                <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.Plus}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                <FontImageSource
+                                    Color="#989898"
+                                    FontFamily="FAR"
+                                    Glyph="{x:Static ui:FaSolModels.Plus}"
+                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
                             </ImageButton.Source>
                         </ImageButton>
                     </HorizontalStackLayout>
                 </Grid>
-                <telerik:RadBorder  BorderColor="#04A2AA"
-                   CornerRadius="8"
-                   AutomationId="border"
-                   BorderThickness="1">
-                    <telerik:RadDataGrid x:Name="grid" 
-                                    BorderBrush="Transparent"
-                                    ItemsSource="{Binding Roles}" 
-                                    AutoGenerateColumns="False"
-                                    UserFilterMode="Disabled"
-                                    UserEditMode="None"
-                                    UserGroupMode="Disabled"
-                                    UserSortMode="None"
-                                    AutomationId="dataGrid"
-                                    SelectionMode="None"
-                                    GridLinesVisibility="Horizontal"
-                                    GridLinesThickness="1.4"
-                                         CurrentCellStyle="{StaticResource CurrentCellStyle}"
-                                        >
+                <!--Table-->
+                <telerik:RadBorder
+                    BorderColor="#04A2AA"
+                    CornerRadius="8"
+                    AutomationId="border"
+                    BorderThickness="1">
+                    <telerik:RadDataGrid
+                        MaximumHeightRequest="384"
+                        Style="{x:Static ui:Styles.HomeTableStyle}"
+                        x:Name="grid"
+                        ItemsSource="{Binding Roles}"
+                        AutomationId="dataGrid"
+                        CurrentCellStyle="{StaticResource CurrentCellStyle}">
                         <telerik:RadDataGrid.Columns>
                             <!--Checkbox-->
-                            <telerik:DataGridTemplateColumn HeaderStyle="{StaticResource DefaultColumnHeaderStyle}">
+                            <telerik:DataGridTemplateColumn
+                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}">
                                 <telerik:DataGridTemplateColumn.CellContentTemplate>
                                     <DataTemplate>
-                                        <VerticalStackLayout HorizontalOptions="Center">
+                                        <VerticalStackLayout
+                                            HorizontalOptions="Center">
                                             <CheckBox></CheckBox>
                                         </VerticalStackLayout>
                                     </DataTemplate>
                                 </telerik:DataGridTemplateColumn.CellContentTemplate>
                             </telerik:DataGridTemplateColumn>
                             <!--Logo-->
-                            <telerik:DataGridTemplateColumn HeaderStyle="{StaticResource DefaultColumnHeaderStyle}">
+                            <telerik:DataGridTemplateColumn
+                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}">
                                 <telerik:DataGridTemplateColumn.CellContentTemplate>
                                     <DataTemplate>
-                                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                            <Image Aspect="AspectFit">
+                                        <VerticalStackLayout
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center">
+                                            <Image
+                                                Aspect="AspectFit">
                                                 <Image.Source>
-                                                    <FontImageSource Color="#989898" FontFamily="FAB" Glyph="{Binding Logo}" Size="{x:Static ui:Dimens.FontSizeT2}" />
+                                                    <FontImageSource
+                                                        Color="#989898"
+                                                        FontFamily="FAB"
+                                                        Glyph="{Binding Logo}"
+                                                        Size="{x:Static ui:Dimens.FontSizeT2}" />
                                                 </Image.Source>
                                             </Image>
                                         </VerticalStackLayout>
@@ -224,35 +212,51 @@
                                 </telerik:DataGridTemplateColumn.CellContentTemplate>
                             </telerik:DataGridTemplateColumn>
                             <!--Company name-->
-                            <telerik:DataGridTextColumn PropertyName="CompanyName" HeaderText="CompanyName"
-                                HeaderStyle="{StaticResource DefaultColumnHeaderStyle}"
-                                CellContentStyle="{StaticResource DefaultCellContentStyle}" />
+                            <telerik:DataGridTextColumn
+                                PropertyName="CompanyName"
+                                HeaderText="CompanyName"
+                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
+                                CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
                             <!--Position-->
-                            <telerik:DataGridTextColumn PropertyName="Position" HeaderText="Position"
-                                HeaderStyle="{StaticResource DefaultColumnHeaderStyle}"
-                                CellContentStyle="{StaticResource DefaultCellContentStyle}" />
+                            <telerik:DataGridTextColumn
+                                PropertyName="Position"
+                                HeaderText="Position"
+                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
+                                CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
                             <!--Duration-->
-                            <telerik:DataGridTextColumn PropertyName="Duration" HeaderText="Duration"
-                                HeaderStyle="{StaticResource DefaultColumnHeaderStyle}"
-                                CellContentStyle="{StaticResource DefaultCellContentStyle}" />
+                            <telerik:DataGridTextColumn
+                                PropertyName="Duration"
+                                HeaderText="Duration"
+                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
+                                CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
                             <!--JobId-->
-                            <telerik:DataGridTextColumn PropertyName="JobId" HeaderText="JobId"
-                                HeaderStyle="{StaticResource DefaultColumnHeaderStyle}"
-                                CellContentStyle="{StaticResource DefaultCellContentStyle}" />
+                            <telerik:DataGridTextColumn
+                                PropertyName="JobId"
+                                HeaderText="JobId"
+                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
+                                CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
                             <!--Status-->
-                            <telerik:DataGridTextColumn PropertyName="Status" HeaderText="Status"
-                                HeaderStyle="{StaticResource DefaultColumnHeaderStyle}"
-                                CellContentStyle="{StaticResource DefaultCellContentStyle}" />
+                            <telerik:DataGridTextColumn
+                                PropertyName="Status"
+                                HeaderText="Status"
+                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
+                                CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
                             <!--More button-->
-                            <telerik:DataGridTemplateColumn HeaderStyle="{StaticResource DefaultColumnHeaderStyle}">
+                            <telerik:DataGridTemplateColumn
+                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}">
                                 <telerik:DataGridTemplateColumn.CellContentTemplate>
                                     <DataTemplate>
                                         <Grid>
                                             <VerticalStackLayout>
-                                                <ImageButton Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmSaveSettingPopupCommand}"
-                                                             CommandParameter="{Binding .}">
+                                                <ImageButton
+                                                    Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmSaveSettingPopupCommand}"
+                                                    CommandParameter="{Binding .}">
                                                     <ImageButton.Source>
-                                                        <FontImageSource Color="#989898" FontFamily="FAR" Glyph="{x:Static ui:FaSolModels.EllipsisVertical}" Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                                        <FontImageSource
+                                                            Color="#989898"
+                                                            FontFamily="FAR"
+                                                            Glyph="{x:Static ui:FaSolModels.EllipsisVertical}"
+                                                            Size="{x:Static ui:Dimens.NavBarTextSize}" />
                                                     </ImageButton.Source>
                                                 </ImageButton>
                                             </VerticalStackLayout>
@@ -268,133 +272,95 @@
             </VerticalStackLayout>
 
             <!--Interviewers-->
-            <VerticalStackLayout Grid.Row="1"
-                     Grid.Column="1"
-                     Spacing="10"
-                     Margin="0,0,0,14">
-                <Grid ColumnDefinitions="*,*"
-                      HeightRequest="30">
+            <VerticalStackLayout
+                Grid.Row="1"
+                Grid.Column="1"
+                Spacing="10"
+                Margin="0,0,0,14">
+                <Grid
+                    ColumnDefinitions="*,*"
+                    HeightRequest="30">
 
-                    <Label 
-                        Grid.Column="0"
-                        HorizontalOptions="Start"
-                       Text="Interviewer"
-                       TextColor="Black"
-                       FontSize="16"
-                       FontAttributes="Bold"
-                       FontFamily="RobotoREG"
-                       Margin="14,0,0,0">
+                    <Label
+                        Text="Interviewer"
+                        Style="{x:Static ui:Styles.HomeTitleLabelStyle}">
                     </Label>
-                    <Label 
+                    <Label
+                        Text="See All"
                         Grid.Column="1"
-                        HorizontalOptions="End"
-                        VerticalOptions="End"
-                       Text="See All"
-                       TextColor="#A2A2A2"
-                       FontSize="12"
-                       FontFamily="RobotoREG"
-                       Margin="14,0,0,0">
+                        Style="{x:Static ui:Styles.LabelSeeAllStyle}">
                     </Label>
                 </Grid>
-                <Grid ColumnDefinitions="*"
-                      ColumnSpacing="14">
-                    <frame:DataFrame Grid.Column="0" 
-                         DataInfo="Figma Product Designer Interview | Chad Lee"
-                         DataTitle="May 4, 2020 @12:30 pm - 1:00 pm"
-                         DataInfoFontSize="16"
-                         DataInfoColor="White"
-                         DataTitleColor="White"
-                         DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
-                         Padding="8"
-                         HeightRequest="108"
-                        />
+                <Grid
+                    ColumnDefinitions="*"
+                    ColumnSpacing="14">
+                    <frame:DataFrame
+                        Grid.Column="0"
+                        DataInfo="Figma Product Designer Interview | Chad Lee"
+                        DataTitle="May 4, 2020 @12:30 pm - 1:00 pm"
+                        DataInfoFontSize="16"
+                        DataInfoColor="White"
+                        DataTitleColor="White"
+                        DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
+                        Padding="8"
+                        HeightRequest="108" />
 
                 </Grid>
             </VerticalStackLayout>
 
             <!--Roles-->
-            <VerticalStackLayout Grid.Row="2"
-                              Grid.Column="1"
-                                            >
-                <Grid ColumnDefinitions="*,*"
-                      HeightRequest="30">
+            <VerticalStackLayout
+                Grid.Row="2"
+                Grid.Column="1">
+                <Grid
+                    ColumnDefinitions="*,*"
+                    HeightRequest="30">
                     <Label
-                            Text="Status board"
-                            HorizontalOptions="Start"
-                            VerticalOptions="Center"
-                            TextColor="Black"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            FontFamily="RobotoREG"
-                            Margin="14,0,0,0"/>
-                    <Label 
-                             Grid.Column="1"
-                             HorizontalOptions="End"
-                             VerticalOptions="End"
-                            Text="See All"
-                            TextColor="#A2A2A2"
-                            FontSize="12"
-                            FontFamily="RobotoREG"
-                            Margin="14,0,0,0">
+                        Text="Status board"
+                        Style="{x:Static ui:Styles.HomeTitleLabelStyle}" />
+                    <Label
+                        Text="See All"
+                        Grid.Column="1"
+                        Style="{x:Static ui:Styles.LabelSeeAllStyle}">
                     </Label>
                 </Grid>
-                <frame:DataFrame Grid.Column="0" 
-                     DataInfo="6"
-                     DataTitle="Visual desinger"
-                     DataInfoFontSize="32"
-                     DataInfoColor="White"
-                     DataTitleColor="White"
-                     DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
-                     Padding="8"
-                     HeightRequest="108"
-                    />
-                <frame:DataFrame Grid.Column="0" 
-                     DataInfo="6"
-                     DataTitle="Visual desinger"
-                     DataInfoFontSize="32"
-                     DataInfoColor="White"
-                     DataTitleColor="White"
-                     DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
-                     Padding="8"
-                     HeightRequest="108"
-                    />
-                <frame:DataFrame Grid.Column="0" 
-                     DataInfo="6"
-                     DataTitle="Visual desinger"
-                     DataInfoFontSize="32"
-                     DataInfoColor="White"
-                     DataTitleColor="White"
-                     DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
-                     Padding="8"
-                     HeightRequest="108"
-                    />
-                <frame:DataFrame Grid.Column="0" 
-                     DataInfo="6"
-                     DataTitle="Visual desinger"
-                     DataInfoFontSize="32"
-                     DataInfoColor="White"
-                     DataTitleColor="White"
-                     DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
-                     Padding="8"
-                     HeightRequest="108"
-                    />
+                <frame:DataFrame
+                    DataInfo="6"
+                    DataTitle="Visual desinger"
+                    Grid.Column="0"
+                    Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
+                <frame:DataFrame
+                    DataInfo="6"
+                    DataTitle="Visual desinger"
+                    Grid.Column="0"
+                    Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
+                <frame:DataFrame
+                    DataInfo="6"
+                    DataTitle="Visual desinger"
+                    Grid.Column="0"
+                    Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
+                <frame:DataFrame
+                    DataInfo="6"
+                    DataTitle="Visual desinger"
+                    Grid.Column="0"
+                    Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
             </VerticalStackLayout>
-            <view:PopupInfo 
-                Grid.ColumnSpan="2"
-                Grid.RowSpan="3"
-                PopupWidth="480"
-                PopupHeight="248"
-                x:Name="confirmPopup"
-                IsOpen="{Binding IsOpenConfirmSaveSettingPopup}"
-                CloseCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
-                CancelCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
-                OkCommand="{Binding DeleteCommand}"
-                CommandParameter="{Binding SelectedItemName}"
-                TitlePopup="{Binding Title}"
-                Message="{Binding PopupMessage}"
-                RoleInfo="{Binding SelectedItem}"
-                />
+        <view:PopupInfo
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="3"
+            PopupWidth="480"
+            PopupHeight="248"
+            x:Name="confirmPopup"
+            IsOpen="{Binding IsOpenConfirmSaveSettingPopup}"
+            CloseCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
+            CancelCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
+            OkCommand="{Binding ConfirmButtonClickCommand}"
+            CommandParameter="{Binding SelectedItem}"
+            TitlePopup="{Binding Title}"
+            Message="{Binding PopupMessage}"
+            RoleInfo="{Binding SelectedItem}" />
         </Grid>
-
     </VerticalStackLayout>
 </ContentView>

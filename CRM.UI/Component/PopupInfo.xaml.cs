@@ -25,13 +25,6 @@ public partial class PopupInfo : ContentView
         BindingMode.TwoWay);
 
 
-    public static readonly BindableProperty ContentWidthProperty = BindableProperty.Create(
-        nameof(ContentWidth),
-        typeof(double),
-        typeof(PopupInfo),
-        default(string),
-        BindingMode.TwoWay);
-
     public static readonly BindableProperty IsOpenProperty = BindableProperty.Create(
         nameof(IsOpen),
         typeof(bool),
@@ -84,9 +77,9 @@ public partial class PopupInfo : ContentView
 
     public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(
         nameof(CommandParameter),
-        typeof(string),
+        typeof(Role),
         typeof(PopupInfo),
-        default(string),
+        default(Role),
         BindingMode.TwoWay);
     
     public static readonly BindableProperty RoleInfoProperty = BindableProperty.Create(
@@ -100,9 +93,9 @@ public partial class PopupInfo : ContentView
         get => (Role)GetValue(RoleInfoProperty);
         set => SetValue(RoleInfoProperty, value);
     }
-    public string CommandParameter
+    public Role CommandParameter
     {
-        get => (string)GetValue(CommandParameterProperty);
+        get => (Role)GetValue(CommandParameterProperty);
         set => SetValue(CommandParameterProperty, value);
     }
 

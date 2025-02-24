@@ -106,17 +106,43 @@ namespace CRM.Client.Features.Home
         }
 
         [RelayCommand]
-        private void OpenConfirmSaveSettingPopup(Role item)
+        private void OpenConfirmSaveSettingPopup(Role? item)
         {
-            SelectedItem = item;
-            Title = string.IsNullOrEmpty(item.CompanyName) ? "New Role" : "Edit Role";
+            if (item is null)
+                SelectedItem = new Role();
+            else
+                SelectedItem = item;
+            Title = item is null ? "New Role" : "Edit Role";
             PopupMessage = $"{SelectedItem.CompanyName}?"; // Update message
             IsOpenConfirmSaveSettingPopup = true;
+        }
+        [RelayCommand]
+        private void ConfirmTest()
+        {
+            var i = "OK";
         }
 
         [RelayCommand]
         private void CloseConfirmSaveSettingPopup()
         {
+            IsOpenConfirmSaveSettingPopup = false;
+        }
+
+        [RelayCommand]
+        private void ConfirmButtonClick(Role item)
+        {
+            if (Title == "Edit Role")
+            {
+                int index = Roles.IndexOf(Roles.FirstOrDefault(x => x.Id == item.Id));
+                if (index != -1)
+                {
+                    Roles[index] = item; // Replace the old item with the updated item
+                }
+            }
+            else
+            {
+                Roles.Add(item); // Add the new item
+            }
             IsOpenConfirmSaveSettingPopup = false;
         }
     }

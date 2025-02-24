@@ -9,6 +9,7 @@ namespace CRM.Library.Entities
 {
     public class Role
     {
+        public string Id { get; private set; } = Guid.NewGuid().ToString();
         public string? Logo { get; set; }   
         public string? CompanyName { get; set; }
         public string? Position { get; set; }  

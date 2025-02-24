@@ -1,8 +1,15 @@
 ﻿using CRM.UI;
+using CRM.UI.Component;
 using Microsoft.Maui.Controls.Shapes;
+using Telerik.Maui.Controls;
+using Telerik.Maui.Controls.DataGrid;
 
 namespace CRM.UI;
 
+//Border: Border
+//Label: Label
+//Width,Height: VisualElement
+//Button: Button
 
 public partial class Styles
 {
@@ -118,151 +125,219 @@ public partial class Styles
 
 public partial class Styles
 {
-    static readonly Color textPrimaryColor = AppColors.Black;
+    //Visual State example
+    public static Style ProgressBarStyle => new Style(typeof(ProgressBar))
+    {
+        Setters =
+        {
+            new Setter
+            {
+                Property = ProgressBar.ProgressColorProperty,
+                Value = Application.Current?.RequestedTheme == AppTheme.Dark ? AppColors.White : AppColors.ThemeBlue
+            },
+            new Setter{ Property = VisualStateManager.VisualStateGroupsProperty,
+                Value = new VisualStateGroupList
+                {
+                    new VisualStateGroup
+                    {
+                        Name = "CommonStates",
+                        States =
+                        {
+                            new VisualState
+                            {
+                                Name = "Normal"
+                            },
+                            new VisualState
+                            {
+                                Name = "Disabled",
+                                Setters =
+                                {
+                                    new Setter{
+                                        Property = ProgressBar.ProgressColorProperty,
+                                        Value = Application.Current?.RequestedTheme == AppTheme.Dark ? AppColors.BorderGrey : AppColors.LightGray
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
 
-    public static readonly Style Title1 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT1)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaSemiBold)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT1)
-        ;
+    /// <summary>
+    /// Style for Popup Entry
+    /// </summary>
+    public static Style PopupEntryStyle => new(typeof(RadEntry))
+    {
+        Setters =
+        {
+        new Setter { Property = RadEntry.FontSizeProperty, Value = 14 },
+        new Setter { Property = RadEntry.CornerRadiusProperty, Value = 0 },
+        new Setter { Property = RadEntry.BackgroundColorProperty, Value = Color.FromArgb("#EBECEF") },
+        new Setter { Property = RadEntry.ClearButtonVisibilityProperty, Value = ClearButtonVisibility.WhileEditing },
+        new Setter { Property = RadEntry.PlaceholderColorProperty, Value = Color.FromArgb("#99000000") },
+        new Setter { Property = RadEntry.BorderBrushProperty, Value = Colors.Transparent }
+        }
+    };
 
-    public static readonly Style Title2 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT2)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaSemiBold)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT2)
-        ;
+    /// <summary>
+    /// Style for Popup Entry Label
+    /// </summary>
+    public static Style PopupEntryLabelStyle => new(typeof(Label))
+    {
+        Setters =
+        {
+            new Setter { Property = Label.PaddingProperty, Value = 12 },
+            new Setter { Property = Label.TextColorProperty, Value = Colors.Black },
+            new Setter { Property = Label.FontFamilyProperty, Value = "RobotoSB" },
+            new Setter { Property = Label.LineBreakModeProperty, Value = LineBreakMode.WordWrap }
+        }
+    };
 
-    public static readonly Style Title3 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT3)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaSemiBold)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT3)
-        ;
+    /// <summary>
+    /// Style for Popup Border Button
+    /// </summary>
+    public static Style PopupBorderButtonStyle => new(typeof(Border))
+    {
+        Setters =
+        {
+            new Setter { Property = Border.StrokeThicknessProperty, Value = 0 },
+            new Setter { Property = VisualElement.BackgroundColorProperty, Value = Color.FromArgb("#EBECEF") },
+            new Setter { Property = Border.StrokeProperty, Value = Colors.Transparent },
+            new Setter { Property = Border.HorizontalOptionsProperty, Value = LayoutOptions.Center },
+            new Setter { Property = VisualElement.HeightRequestProperty, Value = 34 },
+            new Setter { Property = VisualElement.WidthRequestProperty, Value = 168 }
+        }
+    };
 
-    public static readonly Style Title4 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT4)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaSemiBold)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT4)
-        ;
+    /// <summary>
+    /// Style for Popup Border Button Label
+    /// </summary>
+    public static Style PopupBorderButtonLabelStyle => new(typeof(Label))
+    {
+        Setters =
+        {
+            new Setter { Property = Label.TextProperty, Value = "Share" },
+            new Setter { Property = Label.TextColorProperty, Value = Color.FromArgb("#45536C") },
+            new Setter { Property = Label.FontSizeProperty, Value = 12 },
+            new Setter { Property = Label.FontFamilyProperty, Value = "RobotoSB" },
+            new Setter { Property = Label.MarginProperty, Value = new Thickness(10, 0, 0, 0) },
+            new Setter { Property = Label.HorizontalOptionsProperty, Value = LayoutOptions.Start },
+            new Setter { Property = Label.VerticalOptionsProperty, Value = LayoutOptions.Center },
+            new Setter { Property = Label.LineBreakModeProperty, Value = LineBreakMode.WordWrap }
+        }
+    };
 
-    public static readonly Style Title5 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT5)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaSemiBold)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT5)
-        ;
+    /// <summary>
+    /// Style for Home table header
+    /// </summary>
+    public static Style HomeTableColumnHeaderStyle => new(typeof(DataGridColumnHeaderAppearance))
+    {
+        Setters =
+        {
+            new Setter { Property = DataGridColumnHeaderAppearance.TextHorizontalOptionsProperty, Value = LayoutOptions.Center },
+            new Setter { Property = DataGridColumnHeaderAppearance.SortIndicatorHorizontalOptionsProperty, Value = LayoutOptions.Center },
+            new Setter { Property = DataGridColumnHeaderAppearance.BorderColorProperty, Value = Colors.Transparent }
+        }
+    };
 
-    public static readonly Style Title6 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT6)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaSemiBold)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT6)
-        ;
+    /// <summary>
+    /// Style for Home table cell
+    /// </summary>
+    public static Style HomeTableCellStyle => new(typeof(DataGridTextCellAppearance))
+    {
+        Setters =
+        {
+            new Setter { Property = DataGridTextCellAppearance.HorizontalTextAlignmentProperty, Value = TextAlignment.Center }
+        }
+    };
 
-    public static readonly Style Title7 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT7)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaSemiBold)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT7)
-        ;
+    /// <summary>
+    /// Home title text style
+    /// </summary>
+    public static Style HomeTitleLabelStyle => new(typeof(Label))
+    {
+        Setters =
+        {
+            new Setter { Property = Label.TextColorProperty, Value = Colors.Black },
+            new Setter { Property = Label.FontSizeProperty, Value = 16 },
+            new Setter { Property = Label.FontAttributesProperty, Value = FontAttributes.Bold },
+            new Setter { Property = Label.FontFamilyProperty, Value = "RobotoREG" },
+            new Setter { Property = Label.HorizontalOptionsProperty, Value = LayoutOptions.Start },
+            new Setter { Property = Label.MarginProperty, Value = new Thickness(14, 0, 0, 0) }
+        }
+    };
 
-    public static readonly Style Subtitle1 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT1)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT1)
-        ;
+    /// <summary>
+    /// Home table style
+    /// </summary>
+    public static Style HomeTableStyle => new(typeof(RadDataGrid))
+    {
+        Setters =
+        {
+            new Setter { Property = RadDataGrid.BorderBrushProperty, Value = Colors.Transparent },
+            new Setter { Property = RadDataGrid.AutoGenerateColumnsProperty, Value = false },
+            new Setter { Property = RadDataGrid.UserFilterModeProperty, Value = DataGridUserFilterMode.Disabled },
+            new Setter { Property = RadDataGrid.UserEditModeProperty, Value = DataGridUserEditMode.None },
+            new Setter { Property = RadDataGrid.UserGroupModeProperty, Value = DataGridUserGroupMode.Disabled },
+            new Setter { Property = RadDataGrid.UserSortModeProperty, Value = DataGridUserSortMode.None },
+            new Setter { Property = RadDataGrid.SelectionModeProperty, Value = DataGridSelectionMode.None },
+            new Setter { Property = RadDataGrid.GridLinesVisibilityProperty, Value = GridLinesVisibility.Horizontal },
+            new Setter { Property = RadDataGrid.GridLinesThicknessProperty, Value = 1.4 }
+        }
+    };
 
-    public static readonly Style Subtitle2 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT2)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT2)
-        ;
+    /// <summary>
+    /// "See all" label style
+    /// </summary>
+    public static Style LabelSeeAllStyle => new(typeof(Label))
+    {
+        Setters =
+        {
+            new Setter { Property = Label.HorizontalOptionsProperty, Value = LayoutOptions.End },
+            new Setter { Property = Label.VerticalOptionsProperty, Value = LayoutOptions.End },
+            new Setter { Property = Label.TextColorProperty, Value = Color.FromArgb("#A2A2A2") },
+            new Setter { Property = Label.FontSizeProperty, Value = 12 },
+            new Setter { Property = Label.FontFamilyProperty, Value = "RobotoREG" },
+            new Setter { Property = Label.MarginProperty, Value = new Thickness(14, 0, 0, 0) }
+        }
+    };
 
-    public static readonly Style Subtitle3 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT3)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT3)
-        ;
+    /// <summary>
+    /// Home Alt Data frame style
+    /// </summary>
+    public static Style HomeAltDataFrameStyle => new(typeof(DataFrame))
+    {
+        Setters =
+        {
+            new Setter { Property = DataFrame.PaddingProperty, Value = new Thickness(8) },
+            new Setter { Property = DataFrame.HeightRequestProperty, Value = 108 },
+            new Setter { Property = DataFrame.DataFrameBackgroundColorProperty, Value = AppColors.ThemeBlue },
+            new Setter { Property = DataFrame.DataInfoFontSizeProperty, Value = 32 },
+            new Setter { Property = DataFrame.DataInfoColorProperty, Value = Color.FromArgb("#FFFFFF")  },
+            new Setter { Property = DataFrame.DataTitleColorProperty, Value = Color.FromArgb("#FFFFFF")  },
+        }
+    };
 
-    public static readonly Style Subtitle4 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT4)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT4)
-        ;
-
-    public static readonly Style Subtitle5 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT5)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT5)
-        ;
-
-    public static readonly Style Subtitle6 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT6)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT6)
-        ;
-
-    public static readonly Style Subtitle7 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT7)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT6)
-        ;
-
-    public static readonly Style Body1 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT5)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT3)
-        ;
-
-    public static readonly Style Body2 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT6)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT6)
-        ;
-
-    public static readonly Style Body3 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT7)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT7)
-        ;
-
-    public static readonly Style Body4 = CreateStyle<Label>()
-        .Set(VisualElement.BackgroundColorProperty, Colors.Transparent)
-        .Set(Label.TextColorProperty, textPrimaryColor)
-        .Set(Label.FontSizeProperty, Dimens.FontSizeT8)
-        .Set(Label.FontFamilyProperty, FontNames.ArchiaRegular)
-        //.Set(Label.LineHeightProperty, Dimens.LineHeightT8)
-        ;
+    //DataInfoFontSize="32"
+    //DataFrameBackgroundColor="White"
+    //DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
+    //DataTitleColor="Black"
+    //Padding="8"
+    //HeightRequest="108"
+    public static Style HomeDataFrameStyle => new(typeof(DataFrame))
+    {
+        Setters =
+        {
+            new Setter { Property = DataFrame.PaddingProperty, Value = new Thickness(8) },
+            new Setter { Property = DataFrame.HeightRequestProperty, Value = 108 },
+            new Setter { Property = DataFrame.DataFrameBackgroundColorProperty, Value = Color.FromArgb("#FFFFFF") },
+            new Setter { Property = DataFrame.DataInfoFontSizeProperty, Value = 32 },
+            new Setter { Property = DataFrame.DataInfoColorProperty, Value = AppColors.ThemeBlue  },
+            new Setter { Property = DataFrame.DataTitleColorProperty, Value = Color.FromArgb("#000000")  },
+        }
+    };
 }
 
 
