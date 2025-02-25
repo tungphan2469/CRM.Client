@@ -97,6 +97,7 @@
                 Grid.Column="0"
                 Spacing="10"
                 >
+                <!--Label and buttons-->
                 <Grid
                     ColumnDefinitions="*,*"
                     HeightRequest="30">
@@ -168,6 +169,8 @@
                     BorderColor="#04A2AA"
                     CornerRadius="8"
                     AutomationId="border"
+                    MinimumHeightRequest="200"
+                    MaximumHeightRequest="300"
                     BorderThickness="1">
                     <telerik:RadDataGrid
                         MaximumHeightRequest="384"
@@ -184,8 +187,8 @@
                                     <DataTemplate>
                                         <VerticalStackLayout
                                             HorizontalOptions="Center">
-                                            <CheckBox
-                                               </CheckBox>
+                                            <CheckBox>
+                                            </CheckBox>
                                         </VerticalStackLayout>
                                     </DataTemplate>
                                 </telerik:DataGridTemplateColumn.CellContentTemplate>
