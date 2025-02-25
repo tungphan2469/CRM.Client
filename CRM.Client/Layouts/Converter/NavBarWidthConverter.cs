@@ -16,9 +16,9 @@ namespace CRM.Client.Layouts.Converter
         {
             if (value is bool isLarge)
             {
-                return isLarge ? 64 : 84; // Large size: 160px, Small size: 80px
+                return isLarge ? 64 : 84;
             }
-            return 84; // Default to small if not a boolean
+            return 84;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

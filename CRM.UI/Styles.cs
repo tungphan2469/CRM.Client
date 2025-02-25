@@ -314,18 +314,15 @@ public partial class Styles
             new Setter { Property = DataFrame.PaddingProperty, Value = new Thickness(8) },
             new Setter { Property = DataFrame.HeightRequestProperty, Value = 108 },
             new Setter { Property = DataFrame.DataFrameBackgroundColorProperty, Value = AppColors.ThemeBlue },
-            new Setter { Property = DataFrame.DataInfoFontSizeProperty, Value = 32 },
+            new Setter { Property = DataFrame.DataInfoFontSizeProperty, Value = (double)32 },
             new Setter { Property = DataFrame.DataInfoColorProperty, Value = Color.FromArgb("#FFFFFF")  },
             new Setter { Property = DataFrame.DataTitleColorProperty, Value = Color.FromArgb("#FFFFFF")  },
         }
     };
 
-    //DataInfoFontSize="32"
-    //DataFrameBackgroundColor="White"
-    //DataInfoColor="{x:Static ui:AppColors.ThemeBlue}"
-    //DataTitleColor="Black"
-    //Padding="8"
-    //HeightRequest="108"
+    /// <summary>
+    /// Home Data frame style
+    /// </summary>
     public static Style HomeDataFrameStyle => new(typeof(DataFrame))
     {
         Setters =
@@ -333,9 +330,20 @@ public partial class Styles
             new Setter { Property = DataFrame.PaddingProperty, Value = new Thickness(8) },
             new Setter { Property = DataFrame.HeightRequestProperty, Value = 108 },
             new Setter { Property = DataFrame.DataFrameBackgroundColorProperty, Value = Color.FromArgb("#FFFFFF") },
-            new Setter { Property = DataFrame.DataInfoFontSizeProperty, Value = 32 },
+            new Setter { Property = DataFrame.DataInfoFontSizeProperty, Value = (double)32 },
             new Setter { Property = DataFrame.DataInfoColorProperty, Value = AppColors.ThemeBlue  },
             new Setter { Property = DataFrame.DataTitleColorProperty, Value = Color.FromArgb("#000000")  },
+        }
+    };
+
+    public static Style PopupStyle => new(typeof(PopupInfo))
+    {
+        Setters =
+        {
+            new Setter { Property = PopupInfo.HorizontalOptionsProperty, Value = LayoutOptions.Center },
+            new Setter { Property = PopupInfo.VerticalOptionsProperty, Value = LayoutOptions.Center },
+            new Setter { Property = PopupInfo.PopupHeightProperty, Value = 248 },
+            new Setter { Property = PopupInfo.PopupWidthProperty, Value = 480 }
         }
     };
 }

@@ -62,6 +62,7 @@ public static class Dimens
     public static readonly double Height94 = 94;
     public static readonly double Height112 = 112;
     public static readonly double Height240 = 240;
+    public static readonly double Height300 = 300;
     public static readonly double Height720 = 720;
     public static readonly double Height740 = 740;
     public static readonly double PopupHeight = 548;
@@ -90,7 +91,26 @@ public static class Dimens
     public static readonly double FlyoutWidth217 = 217;
     public static readonly double Width217 = 217;
 
+    public static readonly double Padding8 = 8;
     public static readonly double Padding10 = 10;
+    public static readonly double Padding12 = 12;
+    public static readonly double Padding14 = 14;
     public static readonly double Padding20 = 20;
+    public static readonly double Padding24 = 24;
+    public static readonly double Padding30 = 30;
+    public static readonly double Padding32 = 32;
+    public static readonly double Padding34 = 34;
     public static readonly double Padding38 = 38;
+
+    public static readonly double Margin10 = 10;
+    public static readonly double Margin14 = 14;
+    public static readonly double Margin16 = 16;
+    public static readonly double Margin20 = 20;
+    public static readonly double Margin30 = 30;
+    public static readonly double Margin38 = 38;
+
+    public static readonly double NavbarExpanded = 38;
+    public static readonly double NavbarCompact = 38;
+
+
 }

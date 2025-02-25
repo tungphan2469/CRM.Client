@@ -3,6 +3,10 @@
 public static class AppColors
 {
     public static readonly Color ThemeBlue = Color.FromArgb("#2F76E6");
+    public static readonly Color IconButtonColor = Color.FromArgb("#989898");
+    public static readonly Color TableBorderColor = Color.FromArgb("#04A2AA");
+    public static readonly Color WhiteText = Color.FromArgb("#FFFFFF");
+    public static readonly Color BlackText = Color.FromArgb("#000000");
 
     public static readonly Color Purple = Color.FromRgb(0x57, 0x5F, 0xCC);
     public static readonly Color Pink = Color.FromRgb(0xFF, 0x5C, 0x9E);

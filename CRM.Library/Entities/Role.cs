@@ -7,7 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CRM.Library.Entities
 {
-    public class Role
+    public partial class Role
     {
         public string Id { get; private set; } = Guid.NewGuid().ToString();
         public string? Logo { get; set; }   
@@ -16,6 +16,7 @@ namespace CRM.Library.Entities
         public string? Duration { get; set; }  
         public string? JobId { get; set; }  
         public string? Status { get; set; }  
-        public string? Activity { get; set; }  
+        public string? Activity { get; set; }
+
     }
 }

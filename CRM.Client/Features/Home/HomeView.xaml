@@ -6,6 +6,7 @@
     xmlns:frame="clr-namespace:CRM.UI.Component;assembly=CRM.UI"
     xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
     xmlns:ui="clr-namespace:CRM.UI;assembly=CRM.UI"
+    xmlns:me="clr-namespace:CRM.UI.MarkupExtensions;assembly=CRM.UI"
     xmlns:view="clr-namespace:CRM.UI.Component;assembly=CRM.UI"
     xmlns:vm="clr-namespace:CRM.Client.Features.Home"
     xmlns:local="clr-namespace:CRM.Client.Features.Home"
@@ -29,25 +30,25 @@
         <Grid
             ColumnDefinitions="150*,42*"
             RowDefinitions="Auto,*,*"
-            Padding="34,24"
+            Padding="{me:EdgeInsets Vertical={x:Static ui:Dimens.Padding24},Horizontal={x:Static ui:Dimens.Padding34}}"
             ColumnSpacing="14">
             <!--Hello and Date time-->
             <VerticalStackLayout
                 Grid.Row="0"
                 Grid.Column="0"
                 Spacing="10"
-                Margin="0,0,0,38">
+                Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin38}}">
                 <Label
                     Text="Welcome Tung Phan!"
-                    TextColor="Black"
+                    TextColor="{x:Static ui:AppColors.BlackText}"
                     FontSize="32"
-                    FontFamily="RobotoSB">
+                    FontFamily="{x:Static ui:FontNames.RobotoSemiBold}">
                 </Label>
                 <Label
                     Text="May 28, 2020"
-                    TextColor="Black"
+                    TextColor="{x:Static ui:AppColors.BlackText}"
                     FontSize="24"
-                    FontFamily="RobotoREG">
+                    FontFamily="{x:Static ui:FontNames.RobotoRegular}">
                 </Label>
             </VerticalStackLayout>
 
@@ -56,7 +57,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Spacing="10"
-                Margin="0,0,0,14">
+                Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin14}}">
                 <Grid
                     ColumnDefinitions="*,*"
                     HeightRequest="30">
@@ -110,66 +111,66 @@
                         <ImageButton>
                             <ImageButton.Source>
                                 <FontImageSource
-                                    Color="#989898"
-                                    FontFamily="FAR"
+                                    Color="{x:Static ui:AppColors.IconButtonColor}"
+                                    FontFamily="{x:Static ui:FontNames.FARegular}"
                                     Glyph="{x:Static ui:FaSolModels.Sliders}"
-                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
                             </ImageButton.Source>
                         </ImageButton>
                         <ImageButton>
                             <ImageButton.Source>
                                 <FontImageSource
-                                    Color="#989898"
-                                    FontFamily="FAR"
+                                    Color="{x:Static ui:AppColors.IconButtonColor}"
+                                    FontFamily="{x:Static ui:FontNames.FARegular}"
                                     Glyph="{x:Static ui:FaSolModels.PenToSquare}"
-                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
                             </ImageButton.Source>
                         </ImageButton>
                         <ImageButton>
                             <ImageButton.Source>
                                 <FontImageSource
-                                    Color="#989898"
-                                    FontFamily="FAR"
+                                    Color="{x:Static ui:AppColors.IconButtonColor}"
+                                    FontFamily="{x:Static ui:FontNames.FARegular}"
                                     Glyph="{x:Static ui:FaSolModels.ShareNodes}"
-                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
                             </ImageButton.Source>
                         </ImageButton>
                         <ImageButton>
                             <ImageButton.Source>
                                 <FontImageSource
-                                    Color="#989898"
-                                    FontFamily="FAR"
+                                    Color="{x:Static ui:AppColors.IconButtonColor}"
+                                    FontFamily="{x:Static ui:FontNames.FARegular}"
                                     Glyph="{x:Static ui:FaSolModels.MagnifyingGlass}"
-                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
                             </ImageButton.Source>
                         </ImageButton>
-                        <ImageButton>
+                        <ImageButton
+                            >
                             <ImageButton.Source>
                                 <FontImageSource
-                                    Color="#989898"
-                                    FontFamily="FAR"
+                                    Color="{x:Static ui:AppColors.IconButtonColor}"
+                                    FontFamily="{x:Static ui:FontNames.FARegular}"
                                     Glyph="{x:Static ui:FaSolModels.Trash}"
-                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
                             </ImageButton.Source>
                         </ImageButton>
                         <ImageButton
                             Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmSaveSettingPopupCommand}">
                             <ImageButton.Source>
                                 <FontImageSource
-                                    Color="#989898"
-                                    FontFamily="FAR"
+                                    Color="{x:Static ui:AppColors.IconButtonColor}"
+                                    FontFamily="{x:Static ui:FontNames.FARegular}"
                                     Glyph="{x:Static ui:FaSolModels.Plus}"
-                                    Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
                             </ImageButton.Source>
                         </ImageButton>
                     </HorizontalStackLayout>
                 </Grid>
                 <!--Table-->
                 <telerik:RadBorder
-                    BorderColor="#04A2AA"
+                    BorderColor="{x:Static ui:AppColors.TableBorderColor}"
                     CornerRadius="8"
                     AutomationId="border"
-                    MinimumHeightRequest="200"
                     MaximumHeightRequest="300"
                     BorderThickness="1">
                     <telerik:RadDataGrid
@@ -187,8 +188,10 @@
                                     <DataTemplate>
                                         <VerticalStackLayout
                                             HorizontalOptions="Center">
-                                            <CheckBox>
-                                            </CheckBox>
+                                            <CheckBox
+                                                CheckedChanged="OnCheckBoxCheckedChanged"
+                                                BindingContext="{Binding .}"
+                                                />
                                         </VerticalStackLayout>
                                     </DataTemplate>
                                 </telerik:DataGridTemplateColumn.CellContentTemplate>
@@ -205,8 +208,8 @@
                                                 Aspect="AspectFit">
                                                 <Image.Source>
                                                     <FontImageSource
-                                                        Color="#989898"
-                                                        FontFamily="FAB"
+                                                        Color="{x:Static ui:AppColors.IconButtonColor}"
+                                                        FontFamily="{x:Static ui:FontNames.FABrand}"
                                                         Glyph="{Binding Logo}"
                                                         Size="{x:Static ui:Dimens.FontSizeT2}" />
                                                 </Image.Source>
@@ -257,10 +260,10 @@
                                                     CommandParameter="{Binding .}">
                                                     <ImageButton.Source>
                                                         <FontImageSource
-                                                            Color="#989898"
-                                                            FontFamily="FAR"
+                                                            Color="{x:Static ui:AppColors.IconButtonColor}"
+                                                            FontFamily="{x:Static ui:FontNames.FARegular}"
                                                             Glyph="{x:Static ui:FaSolModels.EllipsisVertical}"
-                                                            Size="{x:Static ui:Dimens.NavBarTextSize}" />
+                                                            Size="{x:Static ui:Dimens.FontSizeT5}" />
                                                     </ImageButton.Source>
                                                 </ImageButton>
                                             </VerticalStackLayout>
@@ -280,11 +283,10 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Spacing="10"
-                Margin="0,0,0,14">
+                Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin14}}">
                 <Grid
                     ColumnDefinitions="*,*"
                     HeightRequest="30">
-
                     <Label
                         Text="Interviewer"
                         Style="{x:Static ui:Styles.HomeTitleLabelStyle}">
@@ -302,13 +304,12 @@
                         Grid.Column="0"
                         DataInfo="Figma Product Designer Interview | Chad Lee"
                         DataTitle="May 4, 2020 @12:30 pm - 1:00 pm"
-                        DataInfoFontSize="16"
-                        DataInfoColor="White"
-                        DataTitleColor="White"
+                        DataInfoFontSize="{x:Static ui:Dimens.FontSizeT6}"
+                        DataInfoColor="{x:Static ui:AppColors.WhiteText}"
+                        DataTitleColor="{x:Static ui:AppColors.WhiteText}"
                         DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
-                        Padding="8"
+                        Padding="{me:EdgeInsets All={x:Static ui:Dimens.Padding8}}"
                         HeightRequest="108" />
-
                 </Grid>
             </VerticalStackLayout>
 
@@ -350,13 +351,10 @@
                     Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
             </VerticalStackLayout>
         <view:PopupInfo
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
+            x:Name="confirmPopup"
             Grid.ColumnSpan="2"
             Grid.RowSpan="3"
-            PopupWidth="480"
-            PopupHeight="248"
-            x:Name="confirmPopup"
+            Style="{x:Static ui:Styles.PopupStyle}"
             IsOpen="{Binding IsOpenConfirmSaveSettingPopup}"
             CloseCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
             CancelCommand="{Binding CloseConfirmSaveSettingPopupCommand}"

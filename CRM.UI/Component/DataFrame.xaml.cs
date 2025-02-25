@@ -45,14 +45,14 @@ public partial class DataFrame : ContentView
 
     public static readonly BindableProperty DataInfoFontSizeProperty = BindableProperty.Create(
        nameof(DataInfoFontSize),
-       typeof(int),
+       typeof(double),
        typeof(DataFrame),
-       1,
+       0.0,
        BindingMode.TwoWay);
 
-    public int DataInfoFontSize
+    public double DataInfoFontSize
     {
-        get => (int)GetValue(DataInfoFontSizeProperty);
+        get => (double)GetValue(DataInfoFontSizeProperty);
         set => SetValue(DataInfoFontSizeProperty, value);
     }
     public string DataInfo

@@ -18,6 +18,14 @@ namespace CRM.Client
             {
                 MainPage = new NavigationPage(new AndroidLayout());
             }
+            var icon = new FontImageSource
+            {
+                Glyph = "\uF0C0",
+                FontFamily = "Font Awesome 5 Free",
+                Size = 20,
+                Color = Colors.White
+            };
         }
+
     }
 }

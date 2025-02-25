@@ -5,6 +5,7 @@
     x:Class="CRM.UI.Component.PopupInfo"
     xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
     xmlns:ui="clr-namespace:CRM.UI"
+    xmlns:me="clr-namespace:CRM.UI.MarkupExtensions"
     x:Name="this">
     <telerik:RadPopup.Popup>
         <telerik:RadPopup
@@ -20,16 +21,19 @@
                 <VerticalStackLayout>
                     <!--Title-->
                     <Grid
-                        Padding="32,32,32,0">
+                        Padding="{me:EdgeInsets Top={x:Static ui:Dimens.Padding32},
+                                                Bottom=0,
+                                                Right={x:Static ui:Dimens.Padding32},
+                                                Left={x:Static ui:Dimens.Padding32}}">
                         <Label
                             Text="{Binding TitlePopup, Source={x:Reference this}}"
-                            TextColor="Black"
-                            FontFamily="RobotoSB"
+                            TextColor="{x:Static ui:AppColors.BlackText}"
+                            FontFamily="{x:Static ui:FontNames.RobotoSemiBold}"
                             HorizontalOptions="Start"
-                            FontSize="16" />
+                            FontSize="{x:Static ui:Dimens.FontSizeT6}" />
                         <Label
-                            FontFamily="FAS"
-                            FontSize="16"
+                            FontFamily="{x:Static ui:FontNames.FASolid}"
+                            FontSize="{x:Static ui:Dimens.FontSizeT6}"
                             Text="{x:Static ui:FaSolModels.Xmark}"
                             TextColor="Red"
                             HorizontalOptions="End"
@@ -43,7 +47,7 @@
                     </Grid>
                     <Grid
                         ColumnDefinitions="150*,42*"
-                        Padding="20,20,20,20"
+                        Padding="{me:EdgeInsets All={x:Static ui:Dimens.Padding20}}"
                         ColumnSpacing="20">
                         <!--JOB INFO-->
                         <VerticalStackLayout
@@ -85,8 +89,7 @@
                                 Text="Activity"
                                 Style="{x:Static ui:Styles.PopupEntryLabelStyle}" />
                             <Grid
-                                ColumnDefinitions="Auto,*"
-                                >
+                                ColumnDefinitions="Auto,*">
                                 <Border
                                     Grid.Column="0"
                                     x:Name="ProfileBorder"
@@ -107,7 +110,7 @@
                                 </Border>
                                 <telerik:RadEntry
                                     Grid.Column="1"
-                                    FontSize="14"
+                                    FontSize="{x:Static ui:Dimens.FontSizeT6}"
                                     CornerRadius="0"
                                     BackgroundColor="White"
                                     ClearButtonVisibility="WhileEditing"
@@ -119,7 +122,10 @@
                             </Grid>
 
                             <telerik:RadButton
-                                Margin="0,12,0,12"
+                                Margin="{me:EdgeInsets Top={x:Static ui:Dimens.Padding12},
+                                                        Bottom={x:Static ui:Dimens.Padding12},
+                                                        Right=0,
+                                                        Left=0}"
                                 BackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
                                 Command="{Binding OkCommand, Source={x:Reference this}}"
                                 CommandParameter="{Binding CommandParameter, Source={x:Reference this}}"
@@ -134,11 +140,14 @@
                             Spacing="4">
                             <!--Add to role-->
                             <Label
-                                Padding="0,0,0,12"
+                                Padding="{me:EdgeInsets Top=0,
+                                                        Bottom={x:Static ui:Dimens.Padding12},
+                                                        Right=0,
+                                                        Left=0}"
                                 Text="ADD TO ROLE"
-                                TextColor="Black"
+                                TextColor="{x:Static ui:AppColors.BlackText}"
                                 HorizontalOptions="Start"
-                                FontSize="16" />
+                                FontSize="{x:Static ui:Dimens.FontSizeT5}" />
 
                             <Border
                                 Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
@@ -200,11 +209,14 @@
                             </Border>
                             <!--Actions-->
                             <Label
-                                Padding="0,12,0,12"
+                                Padding="{me:EdgeInsets Top={x:Static ui:Dimens.Padding12},
+                                                         Bottom={x:Static ui:Dimens.Padding12},
+                                                         Right=0,
+                                                         Left=0}"
                                 Text="ACTIONS"
-                                TextColor="Black"
+                                TextColor="{x:Static ui:AppColors.BlackText}"
                                 HorizontalOptions="Start"
-                                FontSize="16" />
+                                FontSize="{x:Static ui:Dimens.FontSizeT5}" />
                             <Border
                                 Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
                                 <Border.StrokeShape>
@@ -268,7 +280,6 @@
                                     Text="Share"
                                     Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
                             </Border>
-
 
                         </VerticalStackLayout>
                     </Grid>

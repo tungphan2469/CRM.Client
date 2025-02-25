@@ -12,6 +12,7 @@ using Telerik.Windows.Documents.Fixed.Model.Data;
 using Telerik.Windows.Documents.Spreadsheet.Expressions.Functions;
 using CRM.UI;
 using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel;
 namespace CRM.Client.Features.Home
 {
     public partial class HomeViewModel : ObservableObject
@@ -116,10 +117,17 @@ namespace CRM.Client.Features.Home
             PopupMessage = $"{SelectedItem.CompanyName}?"; // Update message
             IsOpenConfirmSaveSettingPopup = true;
         }
-        [RelayCommand]
-        private void ConfirmTest()
+
+      
+        public void DeleteRoles(List<string> ids)
         {
-            var i = "OK";
+            for (int i = Roles.Count - 1; i >= 0; i--)
+            {
+                if (ids.Contains(Roles[i].Id))
+                {
+                    Roles.RemoveAt(i);
+                }
+            }
         }
 
         [RelayCommand]
@@ -131,7 +139,7 @@ namespace CRM.Client.Features.Home
         [RelayCommand]
         private void ConfirmButtonClick(Role item)
         {
-            if (Title == "Edit Role")
+            if (Roles.Any(x => x.Id == item.Id))
             {
                 int index = Roles.IndexOf(Roles.FirstOrDefault(x => x.Id == item.Id));
                 if (index != -1)
@@ -145,7 +153,5 @@ namespace CRM.Client.Features.Home
             }
             IsOpenConfirmSaveSettingPopup = false;
         }
-
-        
     }
 }

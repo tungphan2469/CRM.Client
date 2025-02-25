@@ -12,4 +12,9 @@ public static class FontNames
     public const string InterBold = nameof(InterBold);
     public const string InterItalic = nameof(InterItalic);
     public const string InterMedium = nameof(InterMedium);
+    public const string FABrand = nameof(FABrand);
+    public const string FARegular = nameof(FARegular);
+    public const string FASolid = nameof(FASolid);
+    public const string RobotoRegular = nameof(RobotoRegular);
+    public const string RobotoSemiBold = nameof(RobotoSemiBold);
 }
