@@ -86,7 +86,7 @@ public partial class PopupInfo : ContentView
         nameof(RoleInfo),
         typeof(Role),
         typeof(PopupInfo),
-        default(string),
+        default(Role),
         BindingMode.TwoWay);
     public Role RoleInfo
     {

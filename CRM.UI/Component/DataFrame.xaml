@@ -20,8 +20,8 @@
                 Opacity="0.3" />
         </Border.Shadow>
 
-        <StackLayout
-            Padding="14"
+        <VerticalStackLayout
+            Padding="{x:Static ui:Dimens.Padding14}"
             Spacing="6">
             <Label
                 Text="{Binding DataInfo, Source={x:Reference this}}"
@@ -34,7 +34,7 @@
                 TextColor="{Binding DataTitleColor, Source={x:Reference this}}"
                 FontFamily="{x:Static ui:FontNames.RobotoRegular}"
                 />
-        </StackLayout>
+        </VerticalStackLayout>
 
     </Border>
 

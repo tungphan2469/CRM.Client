@@ -110,24 +110,17 @@ namespace CRM.Client.Features.Home
         private void OpenConfirmSaveSettingPopup(Role? item)
         {
             if (item is null)
+            {
                 SelectedItem = new Role();
+            }
             else
-                SelectedItem = item;
+            {
+                var clonedRole = new Role().RoleMapping(item);
+                SelectedItem = clonedRole;
+            }
             Title = item is null ? "New Role" : "Edit Role";
             PopupMessage = $"{SelectedItem.CompanyName}?"; // Update message
             IsOpenConfirmSaveSettingPopup = true;
-        }
-
-      
-        public void DeleteRoles(List<string> ids)
-        {
-            for (int i = Roles.Count - 1; i >= 0; i--)
-            {
-                if (ids.Contains(Roles[i].Id))
-                {
-                    Roles.RemoveAt(i);
-                }
-            }
         }
 
         [RelayCommand]
@@ -153,5 +146,60 @@ namespace CRM.Client.Features.Home
             }
             IsOpenConfirmSaveSettingPopup = false;
         }
+
+        [ObservableProperty]
+        private bool isOpenConfirmDeletePopup;
+
+
+
+        private ObservableCollection<string> idsToDelete = new();
+
+        public void IdsToDeleteListUpdate(string id, bool value)
+        {
+
+            if (value)
+            {
+                if (!idsToDelete.Contains(id))
+                    idsToDelete.Add(id);
+            }
+            else
+            {
+                if (idsToDelete.Contains(id))
+                    idsToDelete.Remove(id);
+            }
+
+        }
+
+        [RelayCommand]
+        private void OpenConfirmDeletePopup()
+        {
+            if (idsToDelete.Count > 0)
+            {
+                var role = idsToDelete.Count == 1 ? "role" : "roles";
+                Title = $"Delete {role}";
+                PopupMessage = $"Delete {idsToDelete.Count} {role}?";
+                IsOpenConfirmDeletePopup = true;
+            }
+        }
+
+        [RelayCommand]
+        private void CloseConfirmDeletePopup()
+        {
+            IsOpenConfirmDeletePopup = false;
+        }
+
+        [RelayCommand]
+        private void DeleteRoles()
+        {
+            for (int i = Roles.Count - 1; i >= 0; i--)
+            {
+                if (idsToDelete.Contains(Roles[i].Id))
+                {
+                    Roles.RemoveAt(i);
+                }
+            }
+        }
+
+
     }
 }

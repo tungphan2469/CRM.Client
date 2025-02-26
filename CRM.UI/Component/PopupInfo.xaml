@@ -6,6 +6,7 @@
     xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
     xmlns:ui="clr-namespace:CRM.UI"
     xmlns:me="clr-namespace:CRM.UI.MarkupExtensions"
+    xmlns:comp="clr-namespace:CRM.UI.Component"
     x:Name="this">
     <telerik:RadPopup.Popup>
         <telerik:RadPopup
@@ -30,60 +31,74 @@
                             TextColor="{x:Static ui:AppColors.BlackText}"
                             FontFamily="{x:Static ui:FontNames.RobotoSemiBold}"
                             HorizontalOptions="Start"
-                            FontSize="{x:Static ui:Dimens.FontSizeT6}" />
-                        <Label
+                            FontSize="{x:Static ui:Dimens.FontSizeT4}" />
+                        <telerik:RadButton
                             FontFamily="{x:Static ui:FontNames.FASolid}"
-                            FontSize="{x:Static ui:Dimens.FontSizeT6}"
+                            FontSize="{x:Static ui:Dimens.FontSizeT4}"
                             Text="{x:Static ui:FaSolModels.Xmark}"
-                            TextColor="Red"
-                            HorizontalOptions="End"
-                            x:Name="closeButton">
+                            TextColor="#45536C"
+                            CornerRadius="80"
+                            Command="{Binding CloseCommand, Source={x:Reference this}}"
+                            HorizontalOptions="End">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup
+                                        x:Name="CommonStates">
+                                        <VisualState
+                                            x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="#45536C" />
+                                            </VisualState.Setters>
+                                        </VisualState>
 
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding CloseCommand, Source={x:Reference this}}" />
-                            </Label.GestureRecognizers>
-                        </Label>
+                                        <VisualState
+                                            x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="Red" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState
+                                            Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="Black" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>
+                        </telerik:RadButton>
                     </Grid>
                     <Grid
-                        ColumnDefinitions="150*,42*"
+                        ColumnDefinitions="140*,52*"
                         Padding="{me:EdgeInsets All={x:Static ui:Dimens.Padding20}}"
                         ColumnSpacing="20">
                         <!--JOB INFO-->
                         <VerticalStackLayout
                             Grid.Column="0">
                             <!--Company-->
-                            <Label
-                                Text="Company"
-                                Style="{x:Static ui:Styles.PopupEntryLabelStyle}" />
-                            <telerik:RadEntry
-                                Style="{x:Static ui:Styles.PopupEntryStyle}"
-                                AutomationId="radEntry"
-                                Text="{Binding RoleInfo.CompanyName, Source={x:Reference this}}" />
+                            <comp:PopupTextEntry
+                                Label="Company"
+                                StringData="{Binding RoleInfo.CompanyName, Source={x:Reference this}}" />
                             <!--Position-->
-                            <Label
-                                Text="Position"
-                                Style="{x:Static ui:Styles.PopupEntryLabelStyle}" />
-                            <telerik:RadEntry
-                                Style="{x:Static ui:Styles.PopupEntryStyle}"
-                                AutomationId="radEntry"
-                                Text="{Binding RoleInfo.Position, Source={x:Reference this}}" />
+                            <comp:PopupTextEntry
+                                Label="Position"
+                                StringData="{Binding RoleInfo.Position, Source={x:Reference this}}" />
                             <!--Duration-->
-                            <Label
-                                Text="Duration"
-                                Style="{x:Static ui:Styles.PopupEntryLabelStyle}" />
-                            <telerik:RadEntry
-                                Style="{x:Static ui:Styles.PopupEntryStyle}"
-                                AutomationId="radEntry"
-                                Text="{Binding RoleInfo.Duration, Source={x:Reference this}}" />
+                            <comp:PopupTextEntry
+                                Label="Duration"
+                                StringData="{Binding RoleInfo.Duration, Source={x:Reference this}}" />
                             <!--Job ID-->
-                            <Label
-                                Text="Job ID#"
-                                Style="{x:Static ui:Styles.PopupEntryLabelStyle}" />
-                            <telerik:RadEntry
-                                Style="{x:Static ui:Styles.PopupEntryStyle}"
-                                AutomationId="radEntry"
-                                Text="{Binding RoleInfo.JobId, Source={x:Reference this}}" />
+                            <comp:PopupTextEntry
+                                Label="Job ID"
+                                StringData="{Binding RoleInfo.JobId, Source={x:Reference this}}" />
                             <!--Activity-->
                             <Label
                                 Text="Activity"
@@ -120,24 +135,68 @@
                                     AutomationId="radEntry"
                                     Text="{Binding RoleInfo.Activity, Source={x:Reference this}}" />
                             </Grid>
-
+                            <!--Submit button-->
                             <telerik:RadButton
                                 Margin="{me:EdgeInsets Top={x:Static ui:Dimens.Padding12},
                                                         Bottom={x:Static ui:Dimens.Padding12},
                                                         Right=0,
                                                         Left=0}"
-                                BackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
                                 Command="{Binding OkCommand, Source={x:Reference this}}"
                                 CommandParameter="{Binding CommandParameter, Source={x:Reference this}}"
                                 VerticalContentAlignment="Center"
                                 HorizontalOptions="Start"
                                 WidthRequest="113"
-                                Text="Submit" />
+                                Text="Submit">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroupList>
+                                        <VisualStateGroup
+                                            x:Name="CommonStates">
+                                            <VisualState
+                                                x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter
+                                                        Property="BackgroundColor"
+                                                        Value="{x:Static ui:AppColors.ThemeBlue}" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+
+                                            <VisualState
+                                                x:Name="PointerOver">
+                                                <VisualState.Setters>
+                                                    <Setter
+                                                        Property="BackgroundColor"
+                                                        Value="#183d78" />
+                                                    <Setter
+                                                        Property="TextColor"
+                                                        Value="White" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+
+                                            <VisualState
+                                                Name="Pressed">
+                                                <VisualState.Setters>
+                                                    <Setter
+                                                        Property="BackgroundColor"
+                                                        Value="#0c2040" />
+                                                    <Setter
+                                                        Property="TextColor"
+                                                        Value="White" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+
+                                        </VisualStateGroup>
+                                    </VisualStateGroupList>
+                                </VisualStateManager.VisualStateGroups>
+                            </telerik:RadButton>
+
+
                         </VerticalStackLayout>
                         <!--MORE-->
                         <VerticalStackLayout
                             Grid.Column="1"
                             Spacing="4">
+
+
                             <!--Add to role-->
                             <Label
                                 Padding="{me:EdgeInsets Top=0,
@@ -148,65 +207,18 @@
                                 TextColor="{x:Static ui:AppColors.BlackText}"
                                 HorizontalOptions="Start"
                                 FontSize="{x:Static ui:Dimens.FontSizeT5}" />
-
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Text="Checklist"
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Text="Due Date"
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Text="Attachment"
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Text="Logo"
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
+                            <comp:PopupActivityButton
+                                Label="Members" />
+                            <comp:PopupActivityButton
+                                Label="Labels" />
+                            <comp:PopupActivityButton
+                                Label="Checklist" />
+                            <comp:PopupActivityButton
+                                Label="Due date" />
+                            <comp:PopupActivityButton
+                                Label="Attachment" />
+                            <comp:PopupActivityButton
+                                Label="Logo" />
                             <!--Actions-->
                             <Label
                                 Padding="{me:EdgeInsets Top={x:Static ui:Dimens.Padding12},
@@ -217,69 +229,18 @@
                                 TextColor="{x:Static ui:AppColors.BlackText}"
                                 HorizontalOptions="Start"
                                 FontSize="{x:Static ui:Dimens.FontSizeT5}" />
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Text="Move"
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Text="Copy"
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
-
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Text="Make Template"
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
-
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Text="Watch"
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
-
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Text="Archive"
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
-                            <Border
-                                Style="{x:Static ui:Styles.PopupBorderButtonStyle}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="3" />
-                                </Border.StrokeShape>
-                                <Label
-                                    Text="Share"
-                                    Style="{x:Static ui:Styles.PopupBorderButtonLabelStyle}" />
-                            </Border>
+                            <comp:PopupActivityButton
+                                Label="Move" />
+                            <comp:PopupActivityButton
+                                Label="Copy" />
+                            <comp:PopupActivityButton
+                                Label="Make Template" />
+                            <comp:PopupActivityButton
+                                Label="Watch" />
+                            <comp:PopupActivityButton
+                                Label="Archive" />
+                            <comp:PopupActivityButton
+                                Label="Share" />
 
                         </VerticalStackLayout>
                     </Grid>

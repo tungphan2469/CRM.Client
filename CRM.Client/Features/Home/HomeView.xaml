@@ -96,8 +96,7 @@
             <VerticalStackLayout
                 Grid.Row="2"
                 Grid.Column="0"
-                Spacing="10"
-                >
+                Spacing="10">
                 <!--Label and buttons-->
                 <Grid
                     ColumnDefinitions="*,*"
@@ -145,7 +144,8 @@
                             </ImageButton.Source>
                         </ImageButton>
                         <ImageButton
-                            >
+                            Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmDeletePopupCommand}">
+                            
                             <ImageButton.Source>
                                 <FontImageSource
                                     Color="{x:Static ui:AppColors.IconButtonColor}"
@@ -190,8 +190,7 @@
                                             HorizontalOptions="Center">
                                             <CheckBox
                                                 CheckedChanged="OnCheckBoxCheckedChanged"
-                                                BindingContext="{Binding .}"
-                                                />
+                                                BindingContext="{Binding .}" />
                                         </VerticalStackLayout>
                                     </DataTemplate>
                                 </telerik:DataGridTemplateColumn.CellContentTemplate>
@@ -350,19 +349,30 @@
                     Grid.Column="0"
                     Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
             </VerticalStackLayout>
-        <view:PopupInfo
-            x:Name="confirmPopup"
-            Grid.ColumnSpan="2"
-            Grid.RowSpan="3"
-            Style="{x:Static ui:Styles.PopupStyle}"
-            IsOpen="{Binding IsOpenConfirmSaveSettingPopup}"
-            CloseCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
-            CancelCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
-            OkCommand="{Binding ConfirmButtonClickCommand}"
-            CommandParameter="{Binding SelectedItem}"
-            TitlePopup="{Binding Title}"
-            Message="{Binding PopupMessage}"
-            RoleInfo="{Binding SelectedItem}" />
+            <view:PopupInfo
+                x:Name="confirmPopup"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="3"
+                Style="{x:Static ui:Styles.PopupStyle}"
+                IsOpen="{Binding IsOpenConfirmSaveSettingPopup}"
+                CloseCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
+                CancelCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
+                OkCommand="{Binding ConfirmButtonClickCommand}"
+                CommandParameter="{Binding SelectedItem}"
+                TitlePopup="{Binding Title}"
+                Message="{Binding PopupMessage}"
+                RoleInfo="{Binding SelectedItem}" />
+            <view:ConfirmPopup
+                x:Name="confirmDeletePopup"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="3"
+                Title="{Binding Title}"
+                Message="{Binding PopupMessage}"
+                IsOpen="{Binding IsOpenConfirmDeletePopup}"
+                CancelCommand="{Binding CloseConfirmDeletePopupCommand}"
+                ConfirmCommand="{Binding DeleteRolesCommand}">
+
+            </view:ConfirmPopup>
         </Grid>
     </VerticalStackLayout>
 </ContentView>

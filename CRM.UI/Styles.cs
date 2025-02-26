@@ -190,7 +190,8 @@ public partial class Styles
         {
             new Setter { Property = Label.PaddingProperty, Value = 12 },
             new Setter { Property = Label.TextColorProperty, Value = Colors.Black },
-            new Setter { Property = Label.FontFamilyProperty, Value = "RobotoSB" },
+            new Setter { Property = Label.FontFamilyProperty, Value = FontNames.RobotoSemiBold },
+            new Setter { Property = Label.FontAttributesProperty, Value = FontAttributes.Bold },
             new Setter { Property = Label.LineBreakModeProperty, Value = LineBreakMode.WordWrap }
         }
     };
@@ -226,6 +227,22 @@ public partial class Styles
             new Setter { Property = Label.HorizontalOptionsProperty, Value = LayoutOptions.Start },
             new Setter { Property = Label.VerticalOptionsProperty, Value = LayoutOptions.Center },
             new Setter { Property = Label.LineBreakModeProperty, Value = LineBreakMode.WordWrap }
+        }
+    };
+
+    public static Style PopupBorderButtonLabelStyle1 => new(typeof(RadButton))
+    {
+        Setters =
+        {
+            new Setter { Property = RadButton.BackgroundColorProperty, Value = Color.FromArgb("#EBECEF") },
+            new Setter { Property = RadButton.HorizontalOptionsProperty, Value = LayoutOptions.Center },
+            new Setter { Property = RadButton.HeightRequestProperty, Value = 34 },
+            new Setter { Property = RadButton.WidthRequestProperty, Value = 168 },
+            new Setter { Property = RadButton.TextColorProperty, Value = Color.FromArgb("#45536C") },
+            new Setter { Property = RadButton.FontSizeProperty, Value = 12 },
+            new Setter { Property = RadButton.FontFamilyProperty, Value = "RobotoSB" },
+            new Setter { Property = RadButton.VerticalOptionsProperty, Value = LayoutOptions.Center },
+            new Setter { Property = RadButton.LineBreakModeProperty, Value = LineBreakMode.WordWrap }
         }
     };
 

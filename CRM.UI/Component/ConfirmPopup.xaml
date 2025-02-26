@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CRM.UI.Component.ConfirmPopup"
+    xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+    xmlns:ui="clr-namespace:CRM.UI"
+    xmlns:me="clr-namespace:CRM.UI.MarkupExtensions"
+    x:Name="this">
+    <telerik:RadPopup.Popup>
+        <telerik:RadPopup
+            x:Name="popup"
+            IsOpen="{Binding IsOpen, Source={x:Reference this}}"
+            OutsideBackgroundColor="#66000000"
+            Placement="Center"
+            VerticalOffset="8">
+            <telerik:RadBorder
+                BackgroundColor="#F4F5F7"
+                CornerRadius="8"
+                WidthRequest="412">
+                <VerticalStackLayout
+                    Padding="{me:EdgeInsets Top={x:Static ui:Dimens.Padding14},
+                                            Bottom={x:Static ui:Dimens.Padding10},
+                                            Right={x:Static ui:Dimens.Padding24},
+                                            Left={x:Static ui:Dimens.Padding24}}">
+                    <!--Title-->
+                    <Grid>
+                        <Label
+                            Text="{Binding Title, Source={x:Reference this}}"
+                            TextColor="{x:Static ui:AppColors.BlackText}"
+                            FontFamily="{x:Static ui:FontNames.RobotoSemiBold}"
+                            HorizontalOptions="Start"
+                            FontSize="{x:Static ui:Dimens.FontSizeT6}" />
+                        <telerik:RadButton
+                            FontFamily="{x:Static ui:FontNames.FASolid}"
+                            FontSize="{x:Static ui:Dimens.FontSizeT4}"
+                            Text="{x:Static ui:FaSolModels.Xmark}"
+                            TextColor="#45536C"
+                            CornerRadius="80"
+                            Command="{Binding CancelCommand, Source={x:Reference this}}"
+                            HorizontalOptions="End">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup
+                                        x:Name="CommonStates">
+                                        <VisualState
+                                            x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="#45536C" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState
+                                            x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="Red" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState
+                                            Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="Black" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>
+                        </telerik:RadButton>
+                    </Grid>
+                    <Label
+                        HorizontalOptions="Start"
+                        Text="{Binding Message, Source={x:Reference this}}"
+                        TextColor="{x:Static ui:AppColors.BlackText}" />
+                    <!--Submit button-->
+                    <telerik:RadButton
+                        Margin="{me:EdgeInsets Top={x:Static ui:Dimens.Padding32}}"
+                        Command="{Binding ConfirmCommand, Source={x:Reference this}}"
+                        VerticalContentAlignment="Center"
+                        HorizontalOptions="Start"
+                        WidthRequest="113"
+                        Text="Submit">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup
+                                    x:Name="CommonStates">
+                                    <VisualState
+                                        x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="{x:Static ui:AppColors.ThemeBlue}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState
+                                        x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="#183d78" />
+                                            <Setter
+                                                Property="TextColor"
+                                                Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState
+                                        Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="#0c2040" />
+                                            <Setter
+                                                Property="TextColor"
+                                                Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </telerik:RadButton>
+                </VerticalStackLayout>
+            </telerik:RadBorder>
+        </telerik:RadPopup>
+    </telerik:RadPopup.Popup>
+</ContentView>
