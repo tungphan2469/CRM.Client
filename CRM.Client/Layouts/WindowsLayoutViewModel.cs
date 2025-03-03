@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CRM.Client.Features.Archive;
 using CRM.Client.Features.Home;
 using CRM.Utilities.MVVM;
@@ -22,14 +23,21 @@ namespace CRM.Client.Layouts
 
         [ObservableProperty]
         private bool isOpen; // This will sync with the View's IsOpen
+
+        [ObservableProperty]
+        private string userName = "Tung Phan";
         public WindowsLayoutViewModel()
         {
             // Set the default view
             SelectedView = new HomeView(); // Replace with your default view
-            TogglePaneCommand = new Command(() => IsOpen = !IsOpen);
+            //TogglePaneCommand = new Command(() => IsOpen = !IsOpen);
         }
 
-        public ICommand TogglePaneCommand { get; }
+        [RelayCommand]
+        public void TogglePaneCommand()
+        {
+            IsOpen = !IsOpen;
+        }
 
         public void ChangeView(string viewName)
         {

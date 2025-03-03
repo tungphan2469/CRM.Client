@@ -14,18 +14,22 @@
             IsOpen="{Binding IsOpen, Source={x:Reference this}}"
             OutsideBackgroundColor="#66000000"
             Placement="Center"
-            VerticalOffset="8">
+            AnimationType="Zoom"
+            AnimationDuration="300"
+            AnimationEasing="{Static Easing.SpringOut}"
+            VerticalOffset="0">
             <telerik:RadBorder
-                BackgroundColor="#F4F5F7"
+                BackgroundColor="{x:Static ui:AppColors.BackgroundColor}"
                 CornerRadius="8"
-                WidthRequest="732">
+                HeightRequest="{Binding CustomHeight, Source={x:Reference this}}"
+                WidthRequest="{Binding CustomWidth, Source={x:Reference this}}">
                 <VerticalStackLayout>
                     <!--Title-->
                     <Grid
-                        Padding="{me:EdgeInsets Top={x:Static ui:Dimens.Padding32},
-                                                Bottom=0,
-                                                Right={x:Static ui:Dimens.Padding32},
-                                                Left={x:Static ui:Dimens.Padding32}}">
+                        Margin="{me:EdgeInsets Top={x:Static ui:Dimens.Margin20},
+                                                Bottom={x:Static ui:Dimens.Margin46},
+                                                Right={x:Static ui:Dimens.Margin16},
+                                                Left={x:Static ui:Dimens.Margin64}}">
                         <Label
                             Text="{Binding TitlePopup, Source={x:Reference this}}"
                             TextColor="{x:Static ui:AppColors.BlackText}"
@@ -76,171 +80,209 @@
                             </VisualStateManager.VisualStateGroups>
                         </telerik:RadButton>
                     </Grid>
+
+                    <!--Content-->
                     <Grid
-                        ColumnDefinitions="140*,52*"
-                        Padding="{me:EdgeInsets All={x:Static ui:Dimens.Padding20}}"
-                        ColumnSpacing="20">
+                        ColumnDefinitions="*,auto"
+                        RowDefinitions="*,auto,auto"
+                        ColumnSpacing="10"
+                        Margin="{me:EdgeInsets Horizontal={x:Static ui:Dimens.Margin16}}">
+
                         <!--JOB INFO-->
                         <VerticalStackLayout
-                            Grid.Column="0">
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Margin="{me:EdgeInsets Left={x:Static ui:Dimens.Margin46}}">
+
                             <!--Company-->
                             <comp:PopupTextEntry
                                 Label="Company"
+                                Style="{x:Static ui:Styles.PopupTextEntryStyle}"
                                 StringData="{Binding RoleInfo.CompanyName, Source={x:Reference this}}" />
                             <!--Position-->
                             <comp:PopupTextEntry
                                 Label="Position"
+                                Style="{x:Static ui:Styles.PopupTextEntryStyle}"
                                 StringData="{Binding RoleInfo.Position, Source={x:Reference this}}" />
                             <!--Duration-->
                             <comp:PopupTextEntry
                                 Label="Duration"
+                                Style="{x:Static ui:Styles.PopupTextEntryStyle}"
                                 StringData="{Binding RoleInfo.Duration, Source={x:Reference this}}" />
                             <!--Job ID-->
                             <comp:PopupTextEntry
                                 Label="Job ID"
+                                Style="{x:Static ui:Styles.PopupTextEntryStyle}"
                                 StringData="{Binding RoleInfo.JobId, Source={x:Reference this}}" />
-                            <!--Activity-->
-                            <Label
-                                Text="Activity"
-                                Style="{x:Static ui:Styles.PopupEntryLabelStyle}" />
-                            <Grid
-                                ColumnDefinitions="Auto,*">
-                                <Border
-                                    Grid.Column="0"
-                                    x:Name="ProfileBorder"
-                                    StrokeThickness="3"
-                                    Stroke="White"
-                                    HorizontalOptions="Center"
-                                    HeightRequest="35"
-                                    WidthRequest="35">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle
-                                            CornerRadius="80" />
-                                    </Border.StrokeShape>
-                                    <Image
-                                        Aspect="AspectFill"
-                                        HorizontalOptions="Fill"
-                                        VerticalOptions="Fill"
-                                        Source="rumia.jpg" />
-                                </Border>
-                                <telerik:RadEntry
-                                    Grid.Column="1"
-                                    FontSize="{x:Static ui:Dimens.FontSizeT6}"
-                                    CornerRadius="0"
-                                    BackgroundColor="White"
-                                    ClearButtonVisibility="WhileEditing"
-                                    BorderBrush="#DADADA"
-                                    Placeholder="Write a comment..."
-                                    PlaceholderColor="#99000000"
-                                    AutomationId="radEntry"
-                                    Text="{Binding RoleInfo.Activity, Source={x:Reference this}}" />
-                            </Grid>
-                            <!--Submit button-->
-                            <telerik:RadButton
-                                Margin="{me:EdgeInsets Top={x:Static ui:Dimens.Padding12},
-                                                        Bottom={x:Static ui:Dimens.Padding12},
-                                                        Right=0,
-                                                        Left=0}"
-                                Command="{Binding OkCommand, Source={x:Reference this}}"
-                                CommandParameter="{Binding CommandParameter, Source={x:Reference this}}"
-                                VerticalContentAlignment="Center"
-                                HorizontalOptions="Start"
-                                WidthRequest="113"
-                                Text="Submit">
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroupList>
-                                        <VisualStateGroup
-                                            x:Name="CommonStates">
-                                            <VisualState
-                                                x:Name="Normal">
-                                                <VisualState.Setters>
-                                                    <Setter
-                                                        Property="BackgroundColor"
-                                                        Value="{x:Static ui:AppColors.ThemeBlue}" />
-                                                </VisualState.Setters>
-                                            </VisualState>
-
-                                            <VisualState
-                                                x:Name="PointerOver">
-                                                <VisualState.Setters>
-                                                    <Setter
-                                                        Property="BackgroundColor"
-                                                        Value="#183d78" />
-                                                    <Setter
-                                                        Property="TextColor"
-                                                        Value="White" />
-                                                </VisualState.Setters>
-                                            </VisualState>
-
-                                            <VisualState
-                                                Name="Pressed">
-                                                <VisualState.Setters>
-                                                    <Setter
-                                                        Property="BackgroundColor"
-                                                        Value="#0c2040" />
-                                                    <Setter
-                                                        Property="TextColor"
-                                                        Value="White" />
-                                                </VisualState.Setters>
-                                            </VisualState>
-
-                                        </VisualStateGroup>
-                                    </VisualStateGroupList>
-                                </VisualStateManager.VisualStateGroups>
-                            </telerik:RadButton>
-
 
                         </VerticalStackLayout>
+
+                        <!--Test-->
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            RowDefinitions="Auto,*"
+                            ColumnDefinitions="Auto,*">
+                            <!-- Avatar -->
+                            <Border
+                                x:Name="ProfileBorder"
+                                Margin="{me:EdgeInsets Right={x:Static ui:Dimens.Margin12}}"
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                StrokeThickness="3"
+                                Stroke="White"
+                                HeightRequest="35"
+                                WidthRequest="35">
+                                <Border.StrokeShape>
+                                    <RoundRectangle
+                                        CornerRadius="80" />
+                                </Border.StrokeShape>
+                                <Image
+                                    Aspect="AspectFill"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Fill"
+                                    Source="rumia.jpg" />
+                            </Border>
+
+                            <!-- Label -->
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                Text="Activity"
+                                Style="{x:Static ui:Styles.PopupEntryLabelStyle}" />
+
+                            <!-- Entry -->
+                            <telerik:RadEntry
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                HeightRequest="{x:Static ui:Dimens.Height42}"
+                                FontSize="{x:Static ui:Dimens.FontSizeT6}"
+                                CornerRadius="0"
+                                BackgroundColor="White"
+                                ClearButtonVisibility="WhileEditing"
+                                BorderBrush="#DADADA"
+                                Placeholder="Write a comment..."
+                                PlaceholderColor="#99000000"
+                                AutomationId="radEntry"
+                                Text="{Binding RoleInfo.Activity, Source={x:Reference this}}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Fill" />
+                        </Grid>
+
+                        <!--Submit button-->
+                        <telerik:RadButton
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="{me:EdgeInsets Vertical={x:Static ui:Dimens.Margin12},
+                                                        Left={x:Static ui:Dimens.Margin46}}"
+                            Command="{Binding OkCommand, Source={x:Reference this}}"
+                            CommandParameter="{Binding CommandParameter, Source={x:Reference this}}"
+                            VerticalContentAlignment="Center"
+                            HorizontalOptions="Start"
+                            HeightRequest="38"
+                            WidthRequest="113"
+                            Text="Submit">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup
+                                        x:Name="CommonStates">
+                                        <VisualState
+                                            x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter
+                                                    Property="BackgroundColor"
+                                                    Value="{x:Static ui:AppColors.ThemeBlue}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState
+                                            x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter
+                                                    Property="BackgroundColor"
+                                                    Value="#183d78" />
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="White" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState
+                                            Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter
+                                                    Property="BackgroundColor"
+                                                    Value="#0c2040" />
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="White" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>
+                        </telerik:RadButton>
+
                         <!--MORE-->
                         <VerticalStackLayout
                             Grid.Column="1"
-                            Spacing="4">
-
-
+                            Grid.RowSpan="3">
                             <!--Add to role-->
                             <Label
-                                Padding="{me:EdgeInsets Top=0,
-                                                        Bottom={x:Static ui:Dimens.Padding12},
-                                                        Right=0,
-                                                        Left=0}"
                                 Text="ADD TO ROLE"
+                                FontFamily="{x:Static ui:FontNames.RobotoSemiBold}"
                                 TextColor="{x:Static ui:AppColors.BlackText}"
                                 HorizontalOptions="Start"
-                                FontSize="{x:Static ui:Dimens.FontSizeT5}" />
+                                Margin="{me:EdgeInsets Top=0,
+                                                        Bottom={x:Static ui:Dimens.Margin12},
+                                                        Right=0,
+                                                        Left=0}" />
                             <comp:PopupActivityButton
-                                Label="Members" />
+                                Label="Members"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <comp:PopupActivityButton
-                                Label="Labels" />
+                                Label="Labels"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <comp:PopupActivityButton
-                                Label="Checklist" />
+                                Label="Checklist"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <comp:PopupActivityButton
-                                Label="Due date" />
+                                Label="Due date"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <comp:PopupActivityButton
-                                Label="Attachment" />
+                                Label="Attachment"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <comp:PopupActivityButton
-                                Label="Logo" />
+                                Label="Logo"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <!--Actions-->
                             <Label
-                                Padding="{me:EdgeInsets Top={x:Static ui:Dimens.Padding12},
-                                                         Bottom={x:Static ui:Dimens.Padding12},
-                                                         Right=0,
-                                                         Left=0}"
                                 Text="ACTIONS"
+                                FontFamily="{x:Static ui:FontNames.RobotoSemiBold}"
                                 TextColor="{x:Static ui:AppColors.BlackText}"
                                 HorizontalOptions="Start"
-                                FontSize="{x:Static ui:Dimens.FontSizeT5}" />
+                                Margin="{me:EdgeInsets Vertical={x:Static ui:Dimens.Margin12}}" />
                             <comp:PopupActivityButton
-                                Label="Move" />
+                                Label="Move"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <comp:PopupActivityButton
-                                Label="Copy" />
+                                Label="Copy"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <comp:PopupActivityButton
-                                Label="Make Template" />
+                                Label="Make Template"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <comp:PopupActivityButton
-                                Label="Watch" />
+                                Label="Watch"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <comp:PopupActivityButton
-                                Label="Archive" />
+                                Label="Archive"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
                             <comp:PopupActivityButton
-                                Label="Share" />
+                                Label="Share"
+                                Style="{x:Static ui:Styles.PopupActivityButtonStyle}" />
 
                         </VerticalStackLayout>
                     </Grid>

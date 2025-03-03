@@ -13,15 +13,19 @@
             IsOpen="{Binding IsOpen, Source={x:Reference this}}"
             OutsideBackgroundColor="#66000000"
             Placement="Center"
+            AnimationType="Zoom"
+            AnimationDuration="300"
+            AnimationEasing="{Static Easing.SpringOut}"
             VerticalOffset="8">
             <telerik:RadBorder
                 BackgroundColor="#F4F5F7"
                 CornerRadius="8"
-                WidthRequest="412">
+                WidthRequest="412"
+                >
                 <VerticalStackLayout
                     Padding="{me:EdgeInsets Top={x:Static ui:Dimens.Padding14},
-                                            Bottom={x:Static ui:Dimens.Padding10},
-                                            Right={x:Static ui:Dimens.Padding24},
+                                            Bottom={x:Static ui:Dimens.Padding14},
+                                            Right={x:Static ui:Dimens.Padding14},
                                             Left={x:Static ui:Dimens.Padding24}}">
                     <!--Title-->
                     <Grid>

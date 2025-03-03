@@ -4992,7 +4992,6 @@ namespace CRM.UI
         public const string CameraSecurity = "\uf8fe";
         public const string Caravan = "\uf8ff";
     }
-
     public static class FaBrands
     {
         public const string Space = "\u0020";

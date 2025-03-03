@@ -11,6 +11,7 @@
             Text="{Binding Label, Source={x:Reference this}}"
             Style="{x:Static ui:Styles.PopupEntryLabelStyle}" />
         <telerik:RadEntry
+            HeightRequest="{x:Static ui:Dimens.Height42}"
             Style="{x:Static ui:Styles.PopupEntryStyle}"
             AutomationId="radEntry"
             Text="{Binding StringData, Source={x:Reference this}}" />

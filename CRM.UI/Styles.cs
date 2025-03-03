@@ -188,7 +188,7 @@ public partial class Styles
     {
         Setters =
         {
-            new Setter { Property = Label.PaddingProperty, Value = 12 },
+            new Setter { Property = Label.PaddingProperty, Value = new Thickness(0,0,0,12) },
             new Setter { Property = Label.TextColorProperty, Value = Colors.Black },
             new Setter { Property = Label.FontFamilyProperty, Value = FontNames.RobotoSemiBold },
             new Setter { Property = Label.FontAttributesProperty, Value = FontAttributes.Bold },
@@ -215,18 +215,11 @@ public partial class Styles
     /// <summary>
     /// Style for Popup Border Button Label
     /// </summary>
-    public static Style PopupBorderButtonLabelStyle => new(typeof(Label))
+    public static Style PopupActivityButtonStyle => new(typeof(PopupActivityButton))
     {
         Setters =
         {
-            new Setter { Property = Label.TextProperty, Value = "Share" },
-            new Setter { Property = Label.TextColorProperty, Value = Color.FromArgb("#45536C") },
-            new Setter { Property = Label.FontSizeProperty, Value = 12 },
-            new Setter { Property = Label.FontFamilyProperty, Value = "RobotoSB" },
-            new Setter { Property = Label.MarginProperty, Value = new Thickness(10, 0, 0, 0) },
-            new Setter { Property = Label.HorizontalOptionsProperty, Value = LayoutOptions.Start },
-            new Setter { Property = Label.VerticalOptionsProperty, Value = LayoutOptions.Center },
-            new Setter { Property = Label.LineBreakModeProperty, Value = LineBreakMode.WordWrap }
+            new Setter { Property = PopupActivityButton.MarginProperty, Value = new Thickness(0,0,0,4) },
         }
     };
 
@@ -282,7 +275,7 @@ public partial class Styles
             new Setter { Property = Label.FontAttributesProperty, Value = FontAttributes.Bold },
             new Setter { Property = Label.FontFamilyProperty, Value = "RobotoREG" },
             new Setter { Property = Label.HorizontalOptionsProperty, Value = LayoutOptions.Start },
-            new Setter { Property = Label.MarginProperty, Value = new Thickness(14, 0, 0, 0) }
+            new Setter { Property = Label.MarginProperty, Value = new Thickness(20, 0, 0, 0) }
         }
     };
 
@@ -315,9 +308,8 @@ public partial class Styles
             new Setter { Property = Label.HorizontalOptionsProperty, Value = LayoutOptions.End },
             new Setter { Property = Label.VerticalOptionsProperty, Value = LayoutOptions.End },
             new Setter { Property = Label.TextColorProperty, Value = Color.FromArgb("#A2A2A2") },
-            new Setter { Property = Label.FontSizeProperty, Value = 12 },
+            new Setter { Property = Label.FontSizeProperty, Value = 10 },
             new Setter { Property = Label.FontFamilyProperty, Value = "RobotoREG" },
-            new Setter { Property = Label.MarginProperty, Value = new Thickness(14, 0, 0, 0) }
         }
     };
 
@@ -328,8 +320,8 @@ public partial class Styles
     {
         Setters =
         {
-            new Setter { Property = DataFrame.PaddingProperty, Value = new Thickness(8) },
             new Setter { Property = DataFrame.HeightRequestProperty, Value = 108 },
+            new Setter { Property = DataFrame.MarginProperty, Value = new Thickness(0,0,0,11) },
             new Setter { Property = DataFrame.DataFrameBackgroundColorProperty, Value = AppColors.ThemeBlue },
             new Setter { Property = DataFrame.DataInfoFontSizeProperty, Value = (double)32 },
             new Setter { Property = DataFrame.DataInfoColorProperty, Value = Color.FromArgb("#FFFFFF")  },
@@ -344,7 +336,6 @@ public partial class Styles
     {
         Setters =
         {
-            new Setter { Property = DataFrame.PaddingProperty, Value = new Thickness(8) },
             new Setter { Property = DataFrame.HeightRequestProperty, Value = 108 },
             new Setter { Property = DataFrame.DataFrameBackgroundColorProperty, Value = Color.FromArgb("#FFFFFF") },
             new Setter { Property = DataFrame.DataInfoFontSizeProperty, Value = (double)32 },
@@ -359,10 +350,16 @@ public partial class Styles
         {
             new Setter { Property = PopupInfo.HorizontalOptionsProperty, Value = LayoutOptions.Center },
             new Setter { Property = PopupInfo.VerticalOptionsProperty, Value = LayoutOptions.Center },
-            new Setter { Property = PopupInfo.PopupHeightProperty, Value = 248 },
-            new Setter { Property = PopupInfo.PopupWidthProperty, Value = 480 }
         }
     };
+
+    public static Style PopupTextEntryStyle => new(typeof(PopupTextEntry))
+    {
+        Setters =
+        {
+            new Setter { Property = PopupTextEntry.MarginProperty, Value = new Thickness(0,0,0,12) },
+        }
+    }; 
 }
 
 

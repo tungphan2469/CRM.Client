@@ -5,10 +5,11 @@ namespace CRM.UI.Component;
 
 public partial class PopupInfo : ContentView
 {
-	public PopupInfo()
-	{
-		InitializeComponent();
-	}
+    public PopupInfo()
+    {
+        InitializeComponent();
+
+    }
     public static readonly BindableProperty CancelCommandProperty = BindableProperty.Create(
         nameof(CancelCommand),
         typeof(ICommand),
@@ -81,13 +82,38 @@ public partial class PopupInfo : ContentView
         typeof(PopupInfo),
         default(Role),
         BindingMode.TwoWay);
-    
+
     public static readonly BindableProperty RoleInfoProperty = BindableProperty.Create(
         nameof(RoleInfo),
         typeof(Role),
         typeof(PopupInfo),
         default(Role),
         BindingMode.TwoWay);
+
+    public static readonly BindableProperty CustomHeightProperty = BindableProperty.Create(
+        nameof(CustomHeight),
+        typeof(double),
+        typeof(PopupInfo),
+        default(double),
+        BindingMode.TwoWay);
+
+    public static readonly BindableProperty CustomWidthProperty = BindableProperty.Create(
+        nameof(CustomWidth),
+        typeof(double),
+        typeof(PopupInfo),
+        default(double),
+        BindingMode.TwoWay);
+    public double CustomWidth
+    {
+        get => (double)GetValue(CustomWidthProperty);
+        set => SetValue(CustomWidthProperty, value);
+    }
+
+    public double CustomHeight
+    {
+        get => (double)GetValue(CustomHeightProperty);
+        set => SetValue(CustomHeightProperty, value);
+    }
     public Role RoleInfo
     {
         get => (Role)GetValue(RoleInfoProperty);

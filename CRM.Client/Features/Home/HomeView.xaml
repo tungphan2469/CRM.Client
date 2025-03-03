@@ -9,7 +9,6 @@
     xmlns:me="clr-namespace:CRM.UI.MarkupExtensions;assembly=CRM.UI"
     xmlns:view="clr-namespace:CRM.UI.Component;assembly=CRM.UI"
     xmlns:vm="clr-namespace:CRM.Client.Features.Home"
-    xmlns:local="clr-namespace:CRM.Client.Features.Home"
     x:Name="this">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -23,356 +22,364 @@
                     Property="BorderColor"
                     Value="Transparent" />
             </Style>
+
         </ResourceDictionary>
 
     </ContentView.Resources>
-    <VerticalStackLayout>
+    <Grid
+        ColumnDefinitions="153.6*,38.4*"
+        RowDefinitions="auto,auto,* "
+        Padding="{me:EdgeInsets Vertical={x:Static ui:Dimens.Padding26},Horizontal={x:Static ui:Dimens.Padding38}}"
+        ColumnSpacing="14">
+        <!--Hello and Date time-->
+        <VerticalStackLayout
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="{me:EdgeInsets Left={x:Static ui:Dimens.Margin20}, Bottom={x:Static ui:Dimens.Margin38}}">
+            <Label
+                Text="Welcome Tung Phan!"
+                TextColor="{x:Static ui:AppColors.BlackText}"
+                FontSize="32"
+                FontFamily="{x:Static ui:FontNames.RobotoSemiBold}">
+            </Label>
+            <Label
+                Text="{Binding CurrentDate}"
+                TextColor="{x:Static ui:AppColors.BlackText}"
+                FontSize="24"
+                FontFamily="{x:Static ui:FontNames.RobotoRegular}">
+            </Label>
+        </VerticalStackLayout>
+
+        <!--Summary boxes-->
+        <VerticalStackLayout
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin14}}">
+            <Grid
+                ColumnDefinitions="*,*"
+                HeightRequest="30"
+                Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin4}}">
+                <Label
+                    Text="Application Statistic"
+                    Style="{x:Static ui:Styles.HomeTitleLabelStyle}">
+                </Label>
+                <Label
+                    Text="See All"
+                    Grid.Column="1"
+                    Style="{x:Static ui:Styles.LabelSeeAllStyle}">
+                </Label>
+            </Grid>
+            <Grid
+                ColumnDefinitions="*,*,*"
+                ColumnSpacing="14">
+                <frame:DataFrame
+                    DataInfo="6"
+                    DataTitle="Contract Roles"
+                    Grid.Column="0"
+                    Style="{x:Static ui:Styles.HomeDataFrameStyle}" />
+                <frame:DataFrame
+                    DataTitle="Full-Time Roles"
+                    DataInfo="12"
+                    Grid.Column="1"
+                    Style="{x:Static ui:Styles.HomeDataFrameStyle}" />
+                <frame:DataFrame
+                    Grid.Column="2"
+                    DataInfo="18"
+                    DataTitle="Total Applications"
+                    Style="{x:Static ui:Styles.HomeDataFrameStyle}" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <!--Tabular data-->
         <Grid
-            ColumnDefinitions="150*,42*"
-            RowDefinitions="Auto,*,*"
-            Padding="{me:EdgeInsets Vertical={x:Static ui:Dimens.Padding24},Horizontal={x:Static ui:Dimens.Padding34}}"
-            ColumnSpacing="14">
-            <!--Hello and Date time-->
-            <VerticalStackLayout
+            Grid.Row="2"
+            Grid.Column="0"
+            RowDefinitions="auto,*">
+            <!--Label and buttons-->
+            <Grid
                 Grid.Row="0"
-                Grid.Column="0"
-                Spacing="10"
-                Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin38}}">
+                ColumnDefinitions="*,*">
                 <Label
-                    Text="Welcome Tung Phan!"
-                    TextColor="{x:Static ui:AppColors.BlackText}"
-                    FontSize="32"
-                    FontFamily="{x:Static ui:FontNames.RobotoSemiBold}">
-                </Label>
-                <Label
-                    Text="May 28, 2020"
-                    TextColor="{x:Static ui:AppColors.BlackText}"
-                    FontSize="24"
-                    FontFamily="{x:Static ui:FontNames.RobotoRegular}">
-                </Label>
-            </VerticalStackLayout>
+                    Text="Status board"
+                    Style="{x:Static ui:Styles.HomeTitleLabelStyle}" />
+                <HorizontalStackLayout
+                    Grid.Column="1"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin4}}">
+                    <ImageButton
+                        Aspect="Fill">
+                        <ImageButton.Source>
+                            <FontImageSource
+                                Color="{x:Static ui:AppColors.IconButtonColor}"
+                                FontFamily="{x:Static ui:FontNames.FARegular}"
+                                Glyph="{x:Static ui:FaSolModels.Sliders}"
+                                Size="{x:Static ui:Dimens.FontSizeT5}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                    <ImageButton>
+                        <ImageButton.Source>
+                            <FontImageSource
+                                Color="{x:Static ui:AppColors.IconButtonColor}"
+                                FontFamily="{x:Static ui:FontNames.FARegular}"
+                                Glyph="{x:Static ui:FaSolModels.PenToSquare}"
+                                Size="{x:Static ui:Dimens.FontSizeT5}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                    <ImageButton>
+                        <ImageButton.Source>
+                            <FontImageSource
+                                Color="{x:Static ui:AppColors.IconButtonColor}"
+                                FontFamily="{x:Static ui:FontNames.FARegular}"
+                                Glyph="{x:Static ui:FaSolModels.ShareNodes}"
+                                Size="{x:Static ui:Dimens.FontSizeT5}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                    <ImageButton>
+                        <ImageButton.Source>
+                            <FontImageSource
+                                Color="{x:Static ui:AppColors.IconButtonColor}"
+                                FontFamily="{x:Static ui:FontNames.FARegular}"
+                                Glyph="{x:Static ui:FaSolModels.MagnifyingGlass}"
+                                Size="{x:Static ui:Dimens.FontSizeT5}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                    <ImageButton
+                        Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmDeletePopupCommand}">
 
-            <!--Summary boxes-->
-            <VerticalStackLayout
+                        <ImageButton.Source>
+                            <FontImageSource
+                                Color="{x:Static ui:AppColors.IconButtonColor}"
+                                FontFamily="{x:Static ui:FontNames.FARegular}"
+                                Glyph="{x:Static ui:FaSolModels.Trash}"
+                                Size="{x:Static ui:Dimens.FontSizeT5}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                    <ImageButton
+                        Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmSaveSettingPopupCommand}">
+                        <ImageButton.Source>
+                            <FontImageSource
+                                Color="{x:Static ui:AppColors.IconButtonColor}"
+                                FontFamily="{x:Static ui:FontNames.FARegular}"
+                                Glyph="{x:Static ui:FaSolModels.Plus}"
+                                Size="{x:Static ui:Dimens.FontSizeT5}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                </HorizontalStackLayout>
+            </Grid>
+            <!--Table-->
+            <telerik:RadBorder
                 Grid.Row="1"
-                Grid.Column="0"
-                Spacing="10"
-                Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin14}}">
-                <Grid
-                    ColumnDefinitions="*,*"
-                    HeightRequest="30">
-                    <Label
-                        Text="Application Statistic"
-                        Style="{x:Static ui:Styles.HomeTitleLabelStyle}">
-                    </Label>
-                    <Label
-                        Text="See All"
-                        Grid.Column="1"
-                        Style="{x:Static ui:Styles.LabelSeeAllStyle}">
-                    </Label>
-                </Grid>
-                <Grid
-                    ColumnDefinitions="*,*,*"
-                    ColumnSpacing="14">
-                    <frame:DataFrame
-                        DataInfo="6"
-                        DataTitle="Contract Roles"
-                        Grid.Column="0"
-                        Style="{x:Static ui:Styles.HomeDataFrameStyle}" />
-                    <frame:DataFrame
-                        DataTitle="Full-Time Roles"
-                        DataInfo="12"
-                        Grid.Column="1"
-                        Style="{x:Static ui:Styles.HomeDataFrameStyle}" />
-                    <frame:DataFrame
-                        Grid.Column="2"
-                        DataInfo="18"
-                        DataTitle="Total Applications"
-                        Style="{x:Static ui:Styles.HomeDataFrameStyle}" />
-                </Grid>
-            </VerticalStackLayout>
-
-            <!--Tabular data-->
-            <VerticalStackLayout
-                Grid.Row="2"
-                Grid.Column="0"
-                Spacing="10">
-                <!--Label and buttons-->
-                <Grid
-                    ColumnDefinitions="*,*"
-                    HeightRequest="30">
-                    <Label
-                        Text="Status board"
-                        Style="{x:Static ui:Styles.HomeTitleLabelStyle}" />
-                    <HorizontalStackLayout
-                        Grid.Column="1"
-                        HorizontalOptions="End">
-                        <ImageButton>
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    Color="{x:Static ui:AppColors.IconButtonColor}"
-                                    FontFamily="{x:Static ui:FontNames.FARegular}"
-                                    Glyph="{x:Static ui:FaSolModels.Sliders}"
-                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                        <ImageButton>
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    Color="{x:Static ui:AppColors.IconButtonColor}"
-                                    FontFamily="{x:Static ui:FontNames.FARegular}"
-                                    Glyph="{x:Static ui:FaSolModels.PenToSquare}"
-                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                        <ImageButton>
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    Color="{x:Static ui:AppColors.IconButtonColor}"
-                                    FontFamily="{x:Static ui:FontNames.FARegular}"
-                                    Glyph="{x:Static ui:FaSolModels.ShareNodes}"
-                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                        <ImageButton>
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    Color="{x:Static ui:AppColors.IconButtonColor}"
-                                    FontFamily="{x:Static ui:FontNames.FARegular}"
-                                    Glyph="{x:Static ui:FaSolModels.MagnifyingGlass}"
-                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                        <ImageButton
-                            Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmDeletePopupCommand}">
-                            
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    Color="{x:Static ui:AppColors.IconButtonColor}"
-                                    FontFamily="{x:Static ui:FontNames.FARegular}"
-                                    Glyph="{x:Static ui:FaSolModels.Trash}"
-                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                        <ImageButton
-                            Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmSaveSettingPopupCommand}">
-                            <ImageButton.Source>
-                                <FontImageSource
-                                    Color="{x:Static ui:AppColors.IconButtonColor}"
-                                    FontFamily="{x:Static ui:FontNames.FARegular}"
-                                    Glyph="{x:Static ui:FaSolModels.Plus}"
-                                    Size="{x:Static ui:Dimens.FontSizeT5}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                    </HorizontalStackLayout>
-                </Grid>
-                <!--Table-->
-                <telerik:RadBorder
-                    BorderColor="{x:Static ui:AppColors.TableBorderColor}"
-                    CornerRadius="8"
-                    AutomationId="border"
-                    MaximumHeightRequest="300"
-                    BorderThickness="1">
-                    <telerik:RadDataGrid
-                        MaximumHeightRequest="384"
-                        Style="{x:Static ui:Styles.HomeTableStyle}"
-                        x:Name="grid"
-                        ItemsSource="{Binding Roles}"
-                        AutomationId="dataGrid"
-                        CurrentCellStyle="{StaticResource CurrentCellStyle}">
-                        <telerik:RadDataGrid.Columns>
-                            <!--Checkbox-->
-                            <telerik:DataGridTemplateColumn
-                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}">
-                                <telerik:DataGridTemplateColumn.CellContentTemplate>
-                                    <DataTemplate>
-                                        <VerticalStackLayout
-                                            HorizontalOptions="Center">
-                                            <CheckBox
-                                                CheckedChanged="OnCheckBoxCheckedChanged"
-                                                BindingContext="{Binding .}" />
-                                        </VerticalStackLayout>
-                                    </DataTemplate>
-                                </telerik:DataGridTemplateColumn.CellContentTemplate>
-                            </telerik:DataGridTemplateColumn>
-                            <!--Logo-->
-                            <telerik:DataGridTemplateColumn
-                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}">
-                                <telerik:DataGridTemplateColumn.CellContentTemplate>
-                                    <DataTemplate>
-                                        <VerticalStackLayout
-                                            HorizontalOptions="Center"
-                                            VerticalOptions="Center">
-                                            <Image
-                                                Aspect="AspectFit">
-                                                <Image.Source>
+                BorderColor="{x:Static ui:AppColors.TableBorderColor}"
+                CornerRadius="8"
+                AutomationId="border"
+                BorderThickness="0">
+                <telerik:RadBorder.Shadow>
+                    <Shadow
+                        Brush="Black"
+                        Offset="0,0"
+                        Radius="10"
+                        Opacity="0.3" />
+                </telerik:RadBorder.Shadow>
+                <telerik:RadDataGrid
+                    Style="{x:Static ui:Styles.HomeTableStyle}"
+                    x:Name="grid"
+                    ItemsSource="{Binding Roles}"
+                    AutomationId="dataGrid"
+                    CurrentCellStyle="{StaticResource CurrentCellStyle}">
+                    <telerik:RadDataGrid.Columns>
+                        <!--Checkbox-->
+                        <telerik:DataGridTemplateColumn
+                            HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}">
+                            <telerik:DataGridTemplateColumn.CellContentTemplate>
+                                <DataTemplate>
+                                    <VerticalStackLayout
+                                        HorizontalOptions="Center">
+                                        <CheckBox
+                                            CheckedChanged="OnCheckBoxCheckedChanged"
+                                            BindingContext="{Binding .}" />
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </telerik:DataGridTemplateColumn.CellContentTemplate>
+                        </telerik:DataGridTemplateColumn>
+                        <!--Logo-->
+                        <telerik:DataGridTemplateColumn
+                            HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}">
+                            <telerik:DataGridTemplateColumn.CellContentTemplate>
+                                <DataTemplate>
+                                    <VerticalStackLayout
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center">
+                                        <Image
+                                            Aspect="AspectFit">
+                                            <Image.Source>
+                                                <FontImageSource
+                                                    Color="{x:Static ui:AppColors.IconButtonColor}"
+                                                    FontFamily="{x:Static ui:FontNames.FABrand}"
+                                                    Glyph="{Binding Logo}"
+                                                    Size="{x:Static ui:Dimens.FontSizeT2}" />
+                                            </Image.Source>
+                                        </Image>
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </telerik:DataGridTemplateColumn.CellContentTemplate>
+                        </telerik:DataGridTemplateColumn>
+                        <!--Company name-->
+                        <telerik:DataGridTextColumn
+                            PropertyName="CompanyName"
+                            HeaderText="CompanyName"
+                            HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
+                            CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
+                        <!--Position-->
+                        <telerik:DataGridTextColumn
+                            PropertyName="Position"
+                            HeaderText="Position"
+                            HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
+                            CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
+                        <!--Duration-->
+                        <telerik:DataGridTextColumn
+                            PropertyName="Duration"
+                            HeaderText="Duration"
+                            HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
+                            CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
+                        <!--JobId-->
+                        <telerik:DataGridTextColumn
+                            PropertyName="JobId"
+                            HeaderText="JobId"
+                            HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
+                            CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
+                        <!--Status-->
+                        <telerik:DataGridTextColumn
+                            PropertyName="Status"
+                            HeaderText="Status"
+                            HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
+                            CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
+                        <!--More button-->
+                        <telerik:DataGridTemplateColumn
+                            HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}">
+                            <telerik:DataGridTemplateColumn.CellContentTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <VerticalStackLayout>
+                                            <ImageButton
+                                                Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmSaveSettingPopupCommand}"
+                                                CommandParameter="{Binding .}">
+                                                <ImageButton.Source>
                                                     <FontImageSource
                                                         Color="{x:Static ui:AppColors.IconButtonColor}"
-                                                        FontFamily="{x:Static ui:FontNames.FABrand}"
-                                                        Glyph="{Binding Logo}"
-                                                        Size="{x:Static ui:Dimens.FontSizeT2}" />
-                                                </Image.Source>
-                                            </Image>
+                                                        FontFamily="{x:Static ui:FontNames.FARegular}"
+                                                        Glyph="{x:Static ui:FaSolModels.EllipsisVertical}"
+                                                        Size="{x:Static ui:Dimens.FontSizeT5}" />
+                                                </ImageButton.Source>
+                                            </ImageButton>
                                         </VerticalStackLayout>
-                                    </DataTemplate>
-                                </telerik:DataGridTemplateColumn.CellContentTemplate>
-                            </telerik:DataGridTemplateColumn>
-                            <!--Company name-->
-                            <telerik:DataGridTextColumn
-                                PropertyName="CompanyName"
-                                HeaderText="CompanyName"
-                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
-                                CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
-                            <!--Position-->
-                            <telerik:DataGridTextColumn
-                                PropertyName="Position"
-                                HeaderText="Position"
-                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
-                                CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
-                            <!--Duration-->
-                            <telerik:DataGridTextColumn
-                                PropertyName="Duration"
-                                HeaderText="Duration"
-                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
-                                CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
-                            <!--JobId-->
-                            <telerik:DataGridTextColumn
-                                PropertyName="JobId"
-                                HeaderText="JobId"
-                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
-                                CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
-                            <!--Status-->
-                            <telerik:DataGridTextColumn
-                                PropertyName="Status"
-                                HeaderText="Status"
-                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}"
-                                CellContentStyle="{x:Static ui:Styles.HomeTableCellStyle}" />
-                            <!--More button-->
-                            <telerik:DataGridTemplateColumn
-                                HeaderStyle="{x:Static ui:Styles.HomeTableColumnHeaderStyle}">
-                                <telerik:DataGridTemplateColumn.CellContentTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <VerticalStackLayout>
-                                                <ImageButton
-                                                    Command="{Binding Source = {RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenConfirmSaveSettingPopupCommand}"
-                                                    CommandParameter="{Binding .}">
-                                                    <ImageButton.Source>
-                                                        <FontImageSource
-                                                            Color="{x:Static ui:AppColors.IconButtonColor}"
-                                                            FontFamily="{x:Static ui:FontNames.FARegular}"
-                                                            Glyph="{x:Static ui:FaSolModels.EllipsisVertical}"
-                                                            Size="{x:Static ui:Dimens.FontSizeT5}" />
-                                                    </ImageButton.Source>
-                                                </ImageButton>
-                                            </VerticalStackLayout>
-                                        </Grid>
-                                    </DataTemplate>
-                                </telerik:DataGridTemplateColumn.CellContentTemplate>
-                            </telerik:DataGridTemplateColumn>
+                                    </Grid>
+                                </DataTemplate>
+                            </telerik:DataGridTemplateColumn.CellContentTemplate>
+                        </telerik:DataGridTemplateColumn>
 
-                        </telerik:RadDataGrid.Columns>
-                    </telerik:RadDataGrid>
-                </telerik:RadBorder>
+                    </telerik:RadDataGrid.Columns>
+                </telerik:RadDataGrid>
+            </telerik:RadBorder>
 
-            </VerticalStackLayout>
-
-            <!--Interviewers-->
-            <VerticalStackLayout
-                Grid.Row="1"
-                Grid.Column="1"
-                Spacing="10"
-                Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin14}}">
-                <Grid
-                    ColumnDefinitions="*,*"
-                    HeightRequest="30">
-                    <Label
-                        Text="Interviewer"
-                        Style="{x:Static ui:Styles.HomeTitleLabelStyle}">
-                    </Label>
-                    <Label
-                        Text="See All"
-                        Grid.Column="1"
-                        Style="{x:Static ui:Styles.LabelSeeAllStyle}">
-                    </Label>
-                </Grid>
-                <Grid
-                    ColumnDefinitions="*"
-                    ColumnSpacing="14">
-                    <frame:DataFrame
-                        Grid.Column="0"
-                        DataInfo="Figma Product Designer Interview | Chad Lee"
-                        DataTitle="May 4, 2020 @12:30 pm - 1:00 pm"
-                        DataInfoFontSize="{x:Static ui:Dimens.FontSizeT6}"
-                        DataInfoColor="{x:Static ui:AppColors.WhiteText}"
-                        DataTitleColor="{x:Static ui:AppColors.WhiteText}"
-                        DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
-                        Padding="{me:EdgeInsets All={x:Static ui:Dimens.Padding8}}"
-                        HeightRequest="108" />
-                </Grid>
-            </VerticalStackLayout>
-
-            <!--Roles-->
-            <VerticalStackLayout
-                Grid.Row="2"
-                Grid.Column="1">
-                <Grid
-                    ColumnDefinitions="*,*"
-                    HeightRequest="30">
-                    <Label
-                        Text="Status board"
-                        Style="{x:Static ui:Styles.HomeTitleLabelStyle}" />
-                    <Label
-                        Text="See All"
-                        Grid.Column="1"
-                        Style="{x:Static ui:Styles.LabelSeeAllStyle}">
-                    </Label>
-                </Grid>
-                <frame:DataFrame
-                    DataInfo="6"
-                    DataTitle="Visual desinger"
-                    Grid.Column="0"
-                    Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
-                <frame:DataFrame
-                    DataInfo="6"
-                    DataTitle="Visual desinger"
-                    Grid.Column="0"
-                    Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
-                <frame:DataFrame
-                    DataInfo="6"
-                    DataTitle="Visual desinger"
-                    Grid.Column="0"
-                    Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
-                <frame:DataFrame
-                    DataInfo="6"
-                    DataTitle="Visual desinger"
-                    Grid.Column="0"
-                    Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
-            </VerticalStackLayout>
-            <view:PopupInfo
-                x:Name="confirmPopup"
-                Grid.ColumnSpan="2"
-                Grid.RowSpan="3"
-                Style="{x:Static ui:Styles.PopupStyle}"
-                IsOpen="{Binding IsOpenConfirmSaveSettingPopup}"
-                CloseCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
-                CancelCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
-                OkCommand="{Binding ConfirmButtonClickCommand}"
-                CommandParameter="{Binding SelectedItem}"
-                TitlePopup="{Binding Title}"
-                Message="{Binding PopupMessage}"
-                RoleInfo="{Binding SelectedItem}" />
-            <view:ConfirmPopup
-                x:Name="confirmDeletePopup"
-                Grid.ColumnSpan="2"
-                Grid.RowSpan="3"
-                Title="{Binding Title}"
-                Message="{Binding PopupMessage}"
-                IsOpen="{Binding IsOpenConfirmDeletePopup}"
-                CancelCommand="{Binding CloseConfirmDeletePopupCommand}"
-                ConfirmCommand="{Binding DeleteRolesCommand}">
-
-            </view:ConfirmPopup>
         </Grid>
-    </VerticalStackLayout>
+
+        <!--Interviewers-->
+        <VerticalStackLayout
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin14}}">
+            <Grid
+                ColumnDefinitions="*,*"
+                HeightRequest="30"
+                Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin4}}">
+                <Label
+                    Text="Interviewer"
+                    Style="{x:Static ui:Styles.HomeTitleLabelStyle}">
+                </Label>
+                <Label
+                    Text="See All"
+                    Grid.Column="1"
+                    Style="{x:Static ui:Styles.LabelSeeAllStyle}">
+                </Label>
+            </Grid>
+
+            <frame:DataFrame
+                DataInfo="Figma Product Designer Interview | Chad Lee"
+                DataTitle="May 4, 2020 @12:30 pm - 1:00 pm"
+                DataInfoFontSize="{x:Static ui:Dimens.FontSizeT6}"
+                DataInfoColor="{x:Static ui:AppColors.WhiteText}"
+                DataTitleColor="{x:Static ui:AppColors.WhiteText}"
+                DataFrameBackgroundColor="{x:Static ui:AppColors.ThemeBlue}"
+                HeightRequest="108" />
+
+        </VerticalStackLayout>
+
+        <!--Roles-->
+        <VerticalStackLayout
+            Grid.Row="2"
+            Grid.Column="1">
+            <Grid
+                ColumnDefinitions="*,*"
+                HeightRequest="30"
+                Margin="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin4}}">
+                <Label
+                    Text="Roles"
+                    Style="{x:Static ui:Styles.HomeTitleLabelStyle}" />
+                <Label
+                    Text="See All"
+                    Grid.Column="1"
+                    Style="{x:Static ui:Styles.LabelSeeAllStyle}">
+                </Label>
+            </Grid>
+            <frame:DataFrame
+                DataInfo="6"
+                DataTitle="Visual desinger"
+                Grid.Column="0"
+                Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
+            <frame:DataFrame
+                DataInfo="6"
+                DataTitle="Visual desinger"
+                Grid.Column="0"
+                Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
+            <frame:DataFrame
+                DataInfo="6"
+                DataTitle="Visual desinger"
+                Grid.Column="0"
+                Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
+            <frame:DataFrame
+                DataInfo="6"
+                DataTitle="Visual desinger"
+                Grid.Column="0"
+                Style="{x:Static ui:Styles.HomeAltDataFrameStyle}" />
+        </VerticalStackLayout>
+
+        <view:PopupInfo
+            x:Name="confirmPopup"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="3"
+            Margin="{me:EdgeInsets Top={x:Static ui:Dimens.Margin20}}"
+            Style="{x:Static ui:Styles.PopupStyle}"
+            IsOpen="{Binding IsOpenConfirmSaveSettingPopup}"
+            CloseCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
+            CancelCommand="{Binding CloseConfirmSaveSettingPopupCommand}"
+            OkCommand="{Binding ConfirmButtonClickCommand}"
+            CommandParameter="{Binding SelectedItem}"
+            TitlePopup="{Binding Title}"
+            Message="{Binding PopupMessage}"
+            RoleInfo="{Binding SelectedItem}"
+            CustomHeight="{Binding PopupHeight}"
+            CustomWidth="{Binding PopupWidth}"/>
+
+        <view:ConfirmPopup
+            x:Name="confirmDeletePopup"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="3"
+            Title="{Binding Title}"
+            Message="{Binding PopupMessage}"
+            IsOpen="{Binding IsOpenConfirmDeletePopup}"
+            CancelCommand="{Binding CloseConfirmDeletePopupCommand}"
+            ConfirmCommand="{Binding DeleteRolesCommand}">
+        </view:ConfirmPopup>
+    </Grid>
 </ContentView>

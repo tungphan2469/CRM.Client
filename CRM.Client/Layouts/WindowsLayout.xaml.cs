@@ -14,7 +14,7 @@ public partial class WindowsLayout : ContentPage
         _viewModel = new WindowsLayoutViewModel();
         BindingContext = _viewModel;
     }
-
+            
     private void OnNavItemSelected(object sender, EventArgs e)
     {
         // Get the selected item from the navigation view

@@ -24,31 +24,27 @@
                 x:Key="UserNameTextWrapConverter" />
             <local:ProfilePositionConverter
                 x:Key="ProfilePositionConverter" />
+            <local:ProfileImageMarginConverter
+                x:Key="ProfileImageMarginConverter" />
+            <local:ProfileNameMarginConverter
+                x:Key="ProfileNameMarginConverter" />
+            <local:ProfileNameConverter
+                x:Key="ProfileNameConverter" />
 
             <!--Profile image-->
             <DataTemplate
                 x:Key="ProfileImage">
-                <StackLayout
+                <VerticalStackLayout
                     x:Name="ProfileContainer"
                     WidthRequest="{Binding IsOpen, Converter={StaticResource NavHeaderWidthRequestConverter}}"
                     HorizontalOptions="Center"
                     Margin="{Binding IsOpen, Converter={StaticResource ProfilePositionConverter}}">
-                    <ImageButton
-                        Command="{Binding TogglePaneCommand, Source={x:Reference navigationView}}"
-                        BackgroundColor="Transparent"
-                        HorizontalOptions="Start">
-                        <ImageButton.Source>
-                            <FontImageSource
-                                FontFamily="{x:Static ui:FontNames.FARegular}"
-                                Glyph="{x:Static ui:FaSolModels.Bars}"
-                                Size="{x:Static ui:Dimens.FontSizeT5}" />
-                        </ImageButton.Source>
-                    </ImageButton>
                     <Border
                         x:Name="ProfileBorder"
                         StrokeThickness="3"
                         Stroke="White"
                         HorizontalOptions="Center"
+                        Margin="{Binding IsOpen, Converter={StaticResource ProfileImageMarginConverter}}"
                         HeightRequest="{Binding IsOpen, Converter={StaticResource ImageResizeConverter}}"
                         WidthRequest="{Binding IsOpen, Converter={StaticResource ImageResizeConverter}}">
                         <Border.StrokeShape>
@@ -64,13 +60,23 @@
                     <Label
                         FontFamily="{x:Static ui:FontNames.RobotoSemiBold}"
                         FontSize="{x:Static ui:Dimens.FontSizeT5}"
-                        Text="Tung Phan"
+                        TextColor="{x:Static ui:AppColors.WhiteText}"
                         LineBreakMode="WordWrap"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         MaximumWidthRequest="{Binding IsOpen, Converter={StaticResource UserNameTextWrapConverter}}"
-                        Margin="{me:EdgeInsets Top={x:Static ui:Dimens.Margin30}}" />
-                </StackLayout>
+                        Margin="{Binding IsOpen, Converter={StaticResource ProfileNameMarginConverter}}">
+                        <Label.Text>
+                            <MultiBinding
+                                Converter="{StaticResource ProfileNameConverter}">
+                                <Binding
+                                    Path="IsOpen" />
+                                <Binding
+                                    Path="UserName" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </VerticalStackLayout>
             </DataTemplate>
         </ResourceDictionary>
 
@@ -102,134 +108,142 @@
             BasedOn="{StaticResource PaneStyle}" />
 
     </ContentPage.Resources>
+    <Grid
+        ColumnDefinitions="auto,*">
+        <telerik:RadNavigationView
+            x:Name="navigationView"
+            DisplayMode="Expanded"
+            AutoChangeDisplayMode="False"
+            HeaderTemplate="{StaticResource ProfileImage}"
+            SelectionChanged="OnNavItemSelected"
+            IsPaneOpen="{Binding IsOpen, Mode=TwoWay}"
+            BackgroundColor="{x:Static ui:AppColors.ThemeBlue}">
+            <telerik:RadNavigationView.Resources>
+                <ResourceDictionary>
+                    <Style
+                        TargetType="telerik:NavigationViewHeader">
+                        <Setter
+                            Property="IsHeaderButtonVisible"
+                            Value="False" />
+                        <Setter
+                            Property="BackgroundColor"
+                            Value="{x:Static ui:AppColors.ThemeBlue}" />
+                        <Setter
+                            Property="HeightRequest"
+                            Value="{x:Static ui:Dimens.Height300}" />
+                        <Setter
+                            Property="Margin"
+                            Value="{me:EdgeInsets All= 0}" />
+                    </Style>
+                    <Style
+                        TargetType="telerik:NavigationViewItemView">
+                        <Setter
+                            Property="Margin"
+                            Value="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin38}}" />
+                        <Setter
+                            Property="TextColor"
+                            Value="{x:Static ui:AppColors.WhiteText}" />
+                        <Setter
+                            Property="FontFamily"
+                            Value="{x:Static ui:FontNames.RobotoSemiBold}" />
+                        <Setter
+                            Property="FontSize"
+                            Value="{x:Static ui:Dimens.NavBarTextSize}" />
+                        <Setter
+                            Property="BorderColor"
+                            Value="Transparent" />
+                    </Style>
+                </ResourceDictionary>
+            </telerik:RadNavigationView.Resources>
+            <telerik:RadNavigationView.GestureRecognizers>
+                <PointerGestureRecognizer
+                    PointerEnteredCommand="{Binding TogglePaneCommand, Source={x:Reference navigationView}}"
+                    PointerExitedCommand="{Binding TogglePaneCommand, Source={x:Reference navigationView}}" />
+            </telerik:RadNavigationView.GestureRecognizers>
+            <telerik:RadNavigationView.Items>
 
-    <telerik:RadNavigationView
-        x:Name="navigationView"
-        DisplayMode="Expanded"
-        AutoChangeDisplayMode="False"
-        HeaderTemplate="{StaticResource ProfileImage}"
-        SelectionChanged="OnNavItemSelected"
-        IsPaneOpen="{Binding IsOpen, Mode=TwoWay}"
-        BackgroundColor="{x:Static ui:AppColors.ThemeBlue}">
+                <telerik:NavigationViewItem
+                    
+                    Position="Footer"
+                    Text="Home">
+                    <telerik:NavigationViewItem.ImageSource>
+                        <FontImageSource
+                            FontFamily="{x:Static ui:FontNames.FARegular}"
+                            Glyph="{x:Static ui:FaSolModels.PenToSquare}"
+                            Size="{x:Static ui:Dimens.NavBarIcontSize}" />
+                    </telerik:NavigationViewItem.ImageSource>
+                </telerik:NavigationViewItem>
+                <telerik:NavigationViewItem
+                    Position="Footer"
+                    Text="Archive">
+                    <telerik:NavigationViewItem.ImageSource>
+                        <FontImageSource
+                            FontFamily="{x:Static ui:FontNames.FARegular}"
+                            Glyph="{x:Static ui:FaSolModels.BoxArchive}"
+                            Size="{x:Static ui:Dimens.NavBarIcontSize}" />
+                    </telerik:NavigationViewItem.ImageSource>
+                </telerik:NavigationViewItem>
+                <telerik:NavigationViewItem
+                    Position="Footer"
+                    Text="Bookmark">
+                    <telerik:NavigationViewItem.ImageSource>
+                        <FontImageSource
+                            FontFamily="{x:Static ui:FontNames.FARegular}"
+                            Glyph="{x:Static ui:FaSolModels.Bookmark}"
+                            Size="{x:Static ui:Dimens.NavBarIcontSize}" />
+                    </telerik:NavigationViewItem.ImageSource>
+                </telerik:NavigationViewItem>
+                <telerik:NavigationViewItem
+                    Position="Footer"
+                    Text="Share">
+                    <telerik:NavigationViewItem.ImageSource>
+                        <FontImageSource
+                            FontFamily="{x:Static ui:FontNames.FARegular}"
+                            Glyph="{x:Static ui:FaSolModels.Share}"
+                            Size="{x:Static ui:Dimens.NavBarIcontSize}" />
+                    </telerik:NavigationViewItem.ImageSource>
+                </telerik:NavigationViewItem>
+                <telerik:NavigationViewItem
+                    Position="Footer"
+                    Text="Download">
+                    <telerik:NavigationViewItem.ImageSource>
+                        <FontImageSource
+                            FontFamily="{x:Static ui:FontNames.FARegular}"
+                            Glyph="{x:Static ui:FaSolModels.Download}"
+                            Size="{x:Static ui:Dimens.NavBarIcontSize}" />
+                    </telerik:NavigationViewItem.ImageSource>
+                </telerik:NavigationViewItem>
+                <telerik:NavigationViewItem
+                    Position="Footer"
+                    Text="Print">
+                    <telerik:NavigationViewItem.ImageSource>
+                        <FontImageSource
+                            FontFamily="{x:Static ui:FontNames.FARegular}"
+                            Glyph="{x:Static ui:FaSolModels.Print}"
+                            Size="{x:Static ui:Dimens.NavBarIcontSize}" />
+                    </telerik:NavigationViewItem.ImageSource>
+                </telerik:NavigationViewItem>
+                <telerik:NavigationViewItem
+                    Position="Footer"
+                    Text="Settings">
+                    <telerik:NavigationViewItem.ImageSource>
+                        <FontImageSource
+                            FontFamily="{x:Static ui:FontNames.FARegular}"
+                            Glyph="{x:Static ui:FaSolModels.Gear}"
+                            Size="{x:Static ui:Dimens.NavBarIcontSize}" />
+                    </telerik:NavigationViewItem.ImageSource>
+                </telerik:NavigationViewItem>
+            </telerik:RadNavigationView.Items>
 
-        <telerik:RadNavigationView.Resources>
-            <ResourceDictionary>
-                <Style
-                    TargetType="telerik:NavigationViewHeader">
-                    <Setter
-                        Property="IsHeaderButtonVisible"
-                        Value="False" />
-                    <Setter
-                        Property="BackgroundColor"
-                        Value="{x:Static ui:AppColors.ThemeBlue}" />
-                    <Setter
-                        Property="HeightRequest"
-                        Value="{x:Static ui:Dimens.Height300}" />
-                    <Setter
-                        Property="Margin"
-                        Value="{me:EdgeInsets All= 0}" />
-                </Style>
-                <Style
-                    TargetType="telerik:NavigationViewItemView">
-                    <Setter
-                        Property="Margin"
-                        Value="{me:EdgeInsets Bottom={x:Static ui:Dimens.Margin16}}" />
-                    <Setter
-                        Property="TextColor"
-                        Value="{x:Static ui:AppColors.WhiteText}" />
-                    <Setter
-                        Property="FontFamily"
-                        Value="{x:Static ui:FontNames.RobotoSemiBold}" />
-                    <Setter
-                        Property="FontSize"
-                        Value="{x:Static ui:Dimens.NavBarTextSize}" />
-                    <Setter
-                        Property="BorderColor"
-                        Value="Transparent" />
-                </Style>
-            </ResourceDictionary>
-        </telerik:RadNavigationView.Resources>
-
-        <telerik:RadNavigationView.Items>
-
-            <telerik:NavigationViewItem
-                Position="Footer"
-                Text="Home">
-                <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource
-                        FontFamily="{x:Static ui:FontNames.FARegular}"
-                        Glyph="{x:Static ui:FaSolModels.PenToSquare}"
-                        Size="{x:Static ui:Dimens.NavBarTextSize}" />
-                </telerik:NavigationViewItem.ImageSource>
-            </telerik:NavigationViewItem>
-            <telerik:NavigationViewItem
-                Position="Footer"
-                Text="Archive">
-                <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource
-                        FontFamily="{x:Static ui:FontNames.FARegular}"
-                        Glyph="{x:Static ui:FaSolModels.BoxArchive}"
-                        Size="{x:Static ui:Dimens.NavBarTextSize}" />
-                </telerik:NavigationViewItem.ImageSource>
-            </telerik:NavigationViewItem>
-            <telerik:NavigationViewItem
-                Position="Footer"
-                Text="Bookmark">
-                <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource
-                        FontFamily="{x:Static ui:FontNames.FARegular}"
-                        Glyph="{x:Static ui:FaSolModels.Bookmark}"
-                        Size="{x:Static ui:Dimens.NavBarTextSize}" />
-                </telerik:NavigationViewItem.ImageSource>
-            </telerik:NavigationViewItem>
-            <telerik:NavigationViewItem
-                Position="Footer"
-                Text="Share">
-                <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource
-                        FontFamily="{x:Static ui:FontNames.FARegular}"
-                        Glyph="{x:Static ui:FaSolModels.Share}"
-                        Size="{x:Static ui:Dimens.NavBarTextSize}" />
-                </telerik:NavigationViewItem.ImageSource>
-            </telerik:NavigationViewItem>
-            <telerik:NavigationViewItem
-                Position="Footer"
-                Text="Download">
-                <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource
-                        FontFamily="{x:Static ui:FontNames.FARegular}"
-                        Glyph="{x:Static ui:FaSolModels.Download}"
-                        Size="{x:Static ui:Dimens.NavBarTextSize}" />
-                </telerik:NavigationViewItem.ImageSource>
-            </telerik:NavigationViewItem>
-            <telerik:NavigationViewItem
-                Position="Footer"
-                Text="Print">
-                <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource
-                        FontFamily="{x:Static ui:FontNames.FARegular}"
-                        Glyph="{x:Static ui:FaSolModels.Print}"
-                        Size="{x:Static ui:Dimens.NavBarTextSize}" />
-                </telerik:NavigationViewItem.ImageSource>
-            </telerik:NavigationViewItem>
-            <telerik:NavigationViewItem
-                Position="Footer"
-                Text="Settings">
-                <telerik:NavigationViewItem.ImageSource>
-                    <FontImageSource
-                        FontFamily="{x:Static ui:FontNames.FARegular}"
-                        Glyph="{x:Static ui:FaSolModels.Gear}"
-                        Size="{x:Static ui:Dimens.NavBarTextSize}" />
-                </telerik:NavigationViewItem.ImageSource>
-            </telerik:NavigationViewItem>
-        </telerik:RadNavigationView.Items>
-
+        </telerik:RadNavigationView>
         <!-- Main Content Area -->
         <Grid
-            BackgroundColor="White">
+            Grid.Column="1"
+            BackgroundColor="{x:Static ui:AppColors.BackgroundColor}">
             <ContentView
                 Grid.Row="0"
                 Content="{Binding SelectedView}" />
         </Grid>
-    </telerik:RadNavigationView>
+
+    </Grid>
 </ContentPage>

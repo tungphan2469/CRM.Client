@@ -3,6 +3,12 @@ using CRM.Client.Extensions;
 using CRM.UI;
 using Microsoft.Extensions.Logging;
 using Telerik.Maui.Controls.Compatibility;
+#if WINDOWS
+using Microsoft.Maui.LifecycleEvents;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
+#endif
+
 
 namespace CRM.Client
 {
@@ -33,9 +39,36 @@ namespace CRM.Client
                 .RegisterCore()
                 .RegisterFeatures()
                 .RegisterPages();
+#if WINDOWS
+    builder.ConfigureLifecycleEvents(lifecycleBuilder =>
+    {
+        lifecycleBuilder.AddWindows(windowsLifecycleBuilder =>
+        {
+            windowsLifecycleBuilder.OnWindowCreated(window =>
+            {
+                if (window is not MauiWinUIWindow mauiWinUiWindow)
+                    return;
+                mauiWinUiWindow.ExtendsContentIntoTitleBar = false;
+                var handle = WinRT.Interop.WindowNative.GetWindowHandle(mauiWinUiWindow);
+                var id = Win32Interop.GetWindowIdFromWindow(handle);
+                var appWindow = AppWindow.GetFromWindowId(id);
 
+                switch (appWindow.Presenter)
+                {
+                    case OverlappedPresenter overlappedPresenter:
+                        overlappedPresenter.IsMaximizable = true;
+                        overlappedPresenter.IsResizable = false;
+                        overlappedPresenter.IsMinimizable = false;
+                        overlappedPresenter.SetBorderAndTitleBar(false, false);
+                        overlappedPresenter.Maximize();
+                        break;
+                }
+            });
+        });
+    });
+#endif
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

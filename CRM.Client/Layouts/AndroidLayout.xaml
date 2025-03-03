@@ -4,7 +4,7 @@
              x:Class="CRM.Client.Layouts.AndroidLayout"
             xmlns:local="clr-namespace:CRM.Client"
              >
-    <TabBar
+    <!--<TabBar
     Route="main">
         <Tab
         Title="Trang chủ"
@@ -31,5 +31,5 @@
             ContentTemplate="{DataTemplate local:MainPage}" />
         </Tab>
 
-    </TabBar>
+    </TabBar>-->
 </Shell>

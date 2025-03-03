@@ -3,6 +3,7 @@
 public static class Dimens
 {
     public static readonly double NavBarTextSize = 16;
+    public static readonly double NavBarIcontSize = 20;
 
     public static readonly double ImageRatioOfHeightOnWidth = 3.0 / 4;
 
@@ -97,17 +98,25 @@ public static class Dimens
     public static readonly double Padding14 = 14;
     public static readonly double Padding20 = 20;
     public static readonly double Padding24 = 24;
+    public static readonly double Padding26 = 26;
     public static readonly double Padding30 = 30;
     public static readonly double Padding32 = 32;
     public static readonly double Padding34 = 34;
     public static readonly double Padding38 = 38;
+    public static readonly double Padding64 = 64;
 
+    public static readonly double Margin4 = 4;
     public static readonly double Margin10 = 10;
+    public static readonly double Margin12 = 12;
     public static readonly double Margin14 = 14;
     public static readonly double Margin16 = 16;
     public static readonly double Margin20 = 20;
+    public static readonly double Margin26 = 26;
     public static readonly double Margin30 = 30;
+    public static readonly double Margin35 = 35;
     public static readonly double Margin38 = 38;
+    public static readonly double Margin46 = 46;
+    public static readonly double Margin64 = 64;
 
     public static readonly double NavbarExpanded = 38;
     public static readonly double NavbarCompact = 38;

@@ -18,13 +18,16 @@ namespace CRM.Client.Features.Home
     public partial class HomeViewModel : ObservableObject
     {
         [ObservableProperty]
-        private DataTable data;
+        private double popupHeight = 0;
+
+        [ObservableProperty]
+        private double popupWidth = 0;
+
+        [ObservableProperty]
+        private string currentDate = DateTime.Now.ToString("MMMM dd, yyyy");
 
         [ObservableProperty]
         private Role selectedItem;
-
-        [ObservableProperty]
-        public ObservableCollection<string> items;
 
         [ObservableProperty]
         private bool isOpenConfirmSaveSettingPopup;
@@ -109,6 +112,9 @@ namespace CRM.Client.Features.Home
         [RelayCommand]
         private void OpenConfirmSaveSettingPopup(Role? item)
         {
+            //PopupHeight = DeviceDisplay.Current.MainDisplayInfo.Height;
+            PopupHeight = 732;
+            PopupWidth = 770;
             if (item is null)
             {
                 SelectedItem = new Role();
@@ -121,6 +127,7 @@ namespace CRM.Client.Features.Home
             Title = item is null ? "New Role" : "Edit Role";
             PopupMessage = $"{SelectedItem.CompanyName}?"; // Update message
             IsOpenConfirmSaveSettingPopup = true;
+
         }
 
         [RelayCommand]
@@ -198,6 +205,7 @@ namespace CRM.Client.Features.Home
                     Roles.RemoveAt(i);
                 }
             }
+            IsOpenConfirmDeletePopup = false;
         }
 
 

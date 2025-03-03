@@ -4,25 +4,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="CRM.UI.Component.DataFrame"
     xmlns:ui="clr-namespace:CRM.UI"
+    xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+    xmlns:me="clr-namespace:CRM.UI.MarkupExtensions"
     x:Name="this">
-    <Border
-        Stroke="Transparent"
+    <telerik:RadBorder
+        BorderColor="Transparent"
+        CornerRadius="8"
         BackgroundColor="{Binding DataFrameBackgroundColor, Source={x:Reference this}}">
-        <Border.StrokeShape>
-            <RoundRectangle
-                CornerRadius="8" />
-        </Border.StrokeShape>
-        <Border.Shadow>
+        <telerik:RadBorder.Shadow>
             <Shadow
-                Brush="Black"
                 Offset="0,0"
                 Radius="10"
-                Opacity="0.3" />
-        </Border.Shadow>
+                Opacity="0.3">
+            </Shadow>
+        </telerik:RadBorder.Shadow>
 
         <VerticalStackLayout
-            Padding="{x:Static ui:Dimens.Padding14}"
-            Spacing="6">
+            Padding="{me:EdgeInsets Horizontal={x:Static ui:Dimens.Padding20}}"
+            VerticalOptions="CenterAndExpand"
+            Spacing="4"
+            >
             <Label
                 Text="{Binding DataInfo, Source={x:Reference this}}"
                 FontSize="{Binding DataInfoFontSize, Source={x:Reference this}}"
@@ -32,10 +33,10 @@
                 Text="{Binding DataTitle, Source={x:Reference this}}"
                 FontSize="13"
                 TextColor="{Binding DataTitleColor, Source={x:Reference this}}"
-                FontFamily="{x:Static ui:FontNames.RobotoRegular}"
+                FontFamily="{x:Static ui:FontNames.RobotoSemiBold}"
                 />
         </VerticalStackLayout>
 
-    </Border>
+    </telerik:RadBorder>
 
 </ContentView>
