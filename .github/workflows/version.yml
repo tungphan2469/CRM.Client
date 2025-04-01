@@ -1,0 +1,69 @@
+name: Version
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        ref: develop
+        token: ${{ secrets.PAT }}
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 21.x
+
+    - name: Install NPM Packages
+      run: npm ci
+      working-directory: ./CRM.Client
+
+    - name: Bump Version
+      run: npm run version
+      working-directory: ./CRM.Client
+
+    - name: Sync Changesets Version
+      shell: pwsh
+      run: |
+        $package = Get-Content -Raw ./CRM.Client/package.json | ConvertFrom-Json
+        $version = $package.version
+
+        $xml = [Xml] (Get-Content ./CRM.Client/CRM.Client.csproj)
+        $xml.Project.PropertyGroup.ApplicationDisplayVersion = $version
+        $xml.Save("./CRM.Client/CRM.Client.csproj")
+
+        $appinstallerXml = [Xml] (Get-Content ./CRM.Client/CRM.Client.appinstaller)
+        $appinstallerNewVersion = "{0}.0" -f $version
+        $appinstallerXml.AppInstaller.MainPackage.Version = $appinstallerNewVersion
+        $appinstallerXml.Save("./CRM.Client/CRM.Client.appinstaller")
+
+    - name: Commit Version Bump
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+        git add ./CRM.Client/CRM.Client.csproj
+        git add ./CRM.Client/CRM.Client.appinstaller
+        git add ./CRM.Client/CHANGELOG.md
+        git add ./CRM.Client/.changeset
+        git add ./CRM.Client/package.json
+        git commit -m "Bump version"
+
+    - name: Push Version Bump
+      run: git push origin develop
+
+    - name: Develop -> Master
+      run: |
+        git fetch origin master
+        git checkout -b master origin/master
+        git merge develop
+        git push origin master
