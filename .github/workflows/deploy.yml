@@ -32,6 +32,12 @@ jobs:
       run: dotnet build -c Release -f:net8.0-windows10.0.19041.0
       working-directory: ./CRM.Client
 
+    - name: Add Telerik NuGet Source
+      run: dotnet nuget add source https://nuget.telerik.com/v3/index.json --name TelerikOnlineFeed --username purchasing@newwave.com.vn --password 8hgikvztC8WmTU --store-password-in-clear-text
+
+    - name: Restore Dependencies
+      run: dotnet restore
+
     - name: Decode Signing Certificate
       run: |
         echo "${{ secrets.SIGNING_CERTIFICATE_BASE_64_CONTENT }}" > cert.asc
